@@ -35,7 +35,6 @@ namespace RogaliqueGame
 		void ExitGame();
 		void QuitGame();
 		void ShowRecords();
-		void LoadNextLevel();
 
 		int GetScore() const { return Score; }
 		void SetScore(int score) { Score = score; }

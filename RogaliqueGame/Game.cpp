@@ -185,10 +185,6 @@ namespace RogaliqueGame
 	}
 	void Game::LooseGame()
 	{
-		assert(stateStack.back().GetType() == GameStateType::Playing);
-		auto playingData = dynamic_cast<GameStatePlayingData*>(stateStack.back().GetData<GameStatePlayingData>());
-
-		Score = playingData->GetScore();
 		UpdateRecord(SETTINGS.PLAYER_NAME, Score);
 
 		PushState(GameStateType::GameOver, false);
@@ -223,11 +219,5 @@ namespace RogaliqueGame
 	void Game::ShowRecords()
 	{
 		PushState(GameStateType::Records, true);
-	}
-	void Game::LoadNextLevel()
-	{
-		assert(stateStack.back().GetType() == GameStateType::Playing);
-		auto playingData = (stateStack.back().GetData<GameStatePlayingData>());
-		playingData->LoadNextLevel();
 	}
 }
