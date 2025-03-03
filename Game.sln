@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFMLTemplate", "SFMLTemplat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML", "SFML\SFML.vcxproj", "{0D9DFFE7-5BF2-448D-8639-0FE0BBB8230A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkanoidGame", "ArkanoidGame\ArkanoidGame.vcxproj", "{C3A962DD-12D8-4E72-99F3-C940EF572498}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RogaliqueGame", "RogaliqueGame\RogaliqueGame.vcxproj", "{C3A962DD-12D8-4E72-99F3-C940EF572498}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -160,22 +160,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BlockFactory.cpp" />
-    <ClCompile Include="Bonus.cpp" />
-    <ClCompile Include="BonusManager.cpp" />
-    <ClCompile Include="FastFireBallStrategy.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateData.cpp" />
     <ClCompile Include="GameStateGameWin.cpp" />
-    <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="PlatformBounceCommand.cpp" />
-    <ClCompile Include="PlatformSizeCommand.cpp" />
-    <ClCompile Include="PlatformSpeedCommand.cpp" />
-    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMain.cpp" />
@@ -189,29 +177,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="BlockFactory.h" />
-    <ClInclude Include="Bonus.h" />
-    <ClInclude Include="BonusManager.h" />
-    <ClInclude Include="FastFireBallStrategy.h" />
-    <ClInclude Include="FragileBlockCommand.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateData.h" />
     <ClInclude Include="GameStateGameWin.h" />
-    <ClInclude Include="Collidable.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Memento.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="PlatformBounceCommand.h" />
-    <ClInclude Include="PlatformSizeCommand.h" />
-    <ClInclude Include="PlatformSpeedCommand.h" />
     <ClInclude Include="randomizer.h" />
-    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameSettings.h" />
