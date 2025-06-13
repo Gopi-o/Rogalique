@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "RogaliqueGame\\RogaliqueGame.vcxproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Engine\\Engine.vcxproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
