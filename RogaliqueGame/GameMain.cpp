@@ -28,6 +28,8 @@ int main()
 	auto developerLevel = std::make_shared<DeveloperLevel>();
 	developerLevel->Start();
 
+	Engine::GameEngine::Instance()->SetCurrentScene(developerLevel.get());
+
 	Engine::GameEngine::Instance()->Run();
 
 	return 0;

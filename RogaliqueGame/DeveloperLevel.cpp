@@ -35,6 +35,11 @@ namespace RogaliqueGame
 
 	void DeveloperLevel::Update(float deltaTime)
 	{
+		if (player)
+		{
+			player->Update(deltaTime);
+		}
+
 		for (auto& enemy : enemies)
 		{
 			enemy->Update(deltaTime);

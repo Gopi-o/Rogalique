@@ -12,6 +12,7 @@ namespace Engine
             rigidbody = gameObject->AddComponent<RigidbodyComponent>();
         }
         rigidbody->SetKinematic(true);
+        rigidbody->SetLinearDamping(1.0f);
     }
 
     FloorComponent::~FloorComponent()

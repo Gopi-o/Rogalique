@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include <GameWorld.h>
 #include <ResourceSystem.h>
+#include <LevelEditor.h>
 
 namespace RogaliqueGame
 {
@@ -13,11 +14,12 @@ namespace RogaliqueGame
         auto transform = gameObject->AddComponent<Engine::TransformComponent>();
         auto rigidbody = gameObject->AddComponent<Engine::RigidbodyComponent>();
         auto renderer = gameObject->AddComponent<Engine::SpriteRendererComponent>();
+        auto collider = gameObject->AddComponent<Engine::SpriteColliderComponent>();
 
         renderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("enemy"));
         renderer->SetPixelSize(40, 40);
 
-        moveSpeed = 100.0f;
+        moveSpeed = 0.35f;
         detectionRange = 300.0f;
     }
 
@@ -39,22 +41,33 @@ namespace RogaliqueGame
             return;
         }
 
-        auto player = Engine::GameWorld::Instance()->FindClosestObject(
+        auto objectsInRange = Engine::GameWorld::Instance()->FindObjectsInRadius(
             transform->GetWorldPosition(),
             detectionRange
         );
 
-        std::cout << "Looking for player..." << std::endl;
-        if (player)
+
+
+        Engine::GameObject* player = nullptr;
+        /*if (player)
         {
             std::cout << "Found object with tag: " << player->GetTag() << std::endl;
         }
         else
         {
             std::cout << "No objects found in range" << std::endl;
+        }*/
+
+        for (auto obj : objectsInRange)
+        {
+            if (obj->GetTag() == "Player")
+            {
+                player = obj;
+                break;
+            }
         }
 
-        if (player && player->GetTag() == "Player")
+        if (player)
         {
             auto playerTransform = player->GetComponent<Engine::TransformComponent>();
             if (!playerTransform) return;
