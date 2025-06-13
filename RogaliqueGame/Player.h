@@ -13,11 +13,12 @@ namespace RogaliqueGame
 	{
 	public:
 		Player();
-
+		void Update(float deltaTime);
 		Engine::GameObject* GetGameObject();
 
 	private:
 		Engine::GameObject* gameObject;
+		float moveSpeed;
 	};
 }
 

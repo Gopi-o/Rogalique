@@ -10,24 +10,28 @@ namespace Engine
 
 	void RigidbodyComponent::Update(float deltaTime)
 	{
-		transform->MoveBy(linearVelocity);
-		transform->RotateBy(angleVelocity);
 
-		linearVelocity = (1.f - linearDamping * deltaTime) * linearVelocity;
-		angleVelocity = (1.f - angleDamping * deltaTime) * angleVelocity;
+		if (!isKinematic)
+		{
+			transform->MoveBy(linearVelocity);
+			transform->RotateBy(angleVelocity);
 
-		if (linearVelocity.x < 0.001f)
-		{
-			linearVelocity = { 0.f, linearVelocity.y };
-		}
-		if (linearVelocity.y < 0.001f)
-		{
-			linearVelocity = { linearVelocity.x, 0.f };
-		}
+			linearVelocity = (1.f - linearDamping * deltaTime) * linearVelocity;
+			angleVelocity = (1.f - angleDamping * deltaTime) * angleVelocity;
 
-		if (angleVelocity < 0.001f)
-		{
-			angleVelocity = 0.f;
+			if (linearVelocity.x < 0.001f)
+			{
+				linearVelocity = { 0.f, linearVelocity.y };
+			}
+			if (linearVelocity.y < 0.001f)
+			{
+				linearVelocity = { linearVelocity.x, 0.f };
+			}
+
+			if (angleVelocity < 0.001f)
+			{
+				angleVelocity = 0.f;
+			}
 		}
 	}
 	void RigidbodyComponent::Render()

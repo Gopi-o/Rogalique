@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameWorld.h"
 #include "RenderSystem.h"
+#include "PhysicsSystem.h"
 
 namespace Engine
 {
@@ -23,31 +24,37 @@ namespace Engine
 		sf::Clock gameClock;
 		sf::Event event;
 
-		while (RenderSystem::Instance()->GetMainWindow().isOpen())
-		{
-			sf::Time dt = gameClock.restart();
-			float deltaTime = dt.asSeconds();
+        while (RenderSystem::Instance()->GetMainWindow().isOpen())
+        {
+            sf::Time dt = gameClock.restart();
+            float deltaTime = dt.asSeconds();
 
-			while (RenderSystem::Instance()->GetMainWindow().pollEvent(event))
-			{
-				if (event.type == sf::Event::Closed)
-				{
-					RenderSystem::Instance()->GetMainWindow().close();
-				}
-			}
+            while (RenderSystem::Instance()->GetMainWindow().pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                {
+                    RenderSystem::Instance()->GetMainWindow().close();
+                }
+            }
 
-			if (!RenderSystem::Instance()->GetMainWindow().isOpen())
-			{
-				break;
-			}
+            if (!RenderSystem::Instance()->GetMainWindow().isOpen())
+            {
+                break;
+            }
 
-			RenderSystem::Instance()->GetMainWindow().clear();
+            RenderSystem::Instance()->GetMainWindow().clear();
 
-			GameWorld::Instance()->Update(deltaTime);
-			GameWorld::Instance()->Render();
-			GameWorld::Instance()->LateUpdate();
+            if (currentScene)
+            {
+                currentScene->Update(deltaTime);
+            }
 
-			RenderSystem::Instance()->GetMainWindow().display();
-		}
+            GameWorld::Instance()->Update(deltaTime);
+            PhysicsSystem::Instance()->Update();
+            GameWorld::Instance()->Render();
+            GameWorld::Instance()->LateUpdate();
+
+            RenderSystem::Instance()->GetMainWindow().display();
+        }
 	}
 }
