@@ -5,6 +5,8 @@
 #include "RenderSystem.h"
 #include "InputComponent.h"
 #include "GameObject.h"
+#include "DamageableComponent.h"
+
 
 
 namespace RogaliqueGame
@@ -19,6 +21,12 @@ namespace RogaliqueGame
 	private:
 		Engine::GameObject* gameObject;
 		float moveSpeed;
+		float attackRange;       
+		float attackCooldown;     
+		float currentCooldown;    
+		float attackDamage;       
+
+		void Attack();
 	};
 }
 

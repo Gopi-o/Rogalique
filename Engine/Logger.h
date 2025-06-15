@@ -6,7 +6,7 @@
 #include <mutex>
 #include <unordered_map>
 
-enum class LogLevel { INFO, WARNING, ERROR };
+enum class LogLevel { INFO, WARNING, ERROR, DEBUG, FATAL };
 
 class LogSink {
 public:
@@ -30,6 +30,10 @@ private:
 			return "WARNING";
 		case LogLevel::ERROR:
 			return "ERROR";
+		case LogLevel::DEBUG:
+			return "DEBUG";
+		case LogLevel::FATAL:
+			return "FATAL";
 		default:
 			return "UNKNOWN";
 		}
@@ -67,6 +71,10 @@ private:
 			return "WARNING";
 		case LogLevel::ERROR:
 			return "ERROR";
+		case LogLevel::DEBUG:
+			return "DEBUG";
+		case LogLevel::FATAL:
+			return "FATAL";
 		default:
 			return "UNKNOWN";
 		}
@@ -95,6 +103,8 @@ public:
 	void info(const std::string& message) { log(LogLevel::INFO, message); }
 	void warrning(const std::string& message) { log(LogLevel::WARNING, message); }
 	void error(const std::string& message) { log(LogLevel::ERROR, message); }
+	void debug(const std::string& message) { log(LogLevel::DEBUG, message); }
+	void fatal(const std::string& message) { log(LogLevel::FATAL, message); }
 };
 
 class logRegister {
@@ -141,3 +151,5 @@ inline void setupLogger() {
 #define LOG_INFO(message) logRegister::getInstance().GetLogger("global")->info(message);
 #define LOG_WARN(message) logRegister::getInstance().GetLogger("global")->warrning(message);
 #define LOG_ERROR(message) logRegister::getInstance().GetLogger("global")->error(message);
+#define LOG_DEBUG(message) logRegister::getInstance().GetLogger("global")->debug(message);
+#define LOG_FATAL(message) logRegister::getInstance().GetLogger("global")->fatal(message);

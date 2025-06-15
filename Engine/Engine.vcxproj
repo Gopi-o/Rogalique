@@ -162,6 +162,10 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DamageableComponent.h" />
+    <ClInclude Include="EffectComponent.h" />
+    <ClInclude Include="EventsTemp.h" />
+    <ClInclude Include="EventSystem.h" />
     <ClInclude Include="FloorComponent.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="framework.h" />
@@ -182,9 +186,11 @@
     <ClInclude Include="RigidbodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SoundComponent.h" />
+    <ClInclude Include="SoundManagerComponent.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteColliderComponent.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
+    <ClInclude Include="StatsComponent.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Vector.h" />
@@ -195,6 +201,10 @@
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DamageableComponent.cpp" />
+    <ClCompile Include="EffectComponent.cpp" />
+    <ClCompile Include="EventsTemp.cpp" />
+    <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="FloorComponent.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -213,9 +223,11 @@
     <ClCompile Include="ResourceSystem.cpp" />
     <ClCompile Include="RigidbodyComponent.cpp" />
     <ClCompile Include="SoundComponent.cpp" />
+    <ClCompile Include="SoundManagerComponent.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteColliderComponent.cpp" />
     <ClCompile Include="SpriteRendererComponent.cpp" />
+    <ClCompile Include="StatsComponent.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="WallComponent.cpp" />

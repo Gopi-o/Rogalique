@@ -4,6 +4,7 @@
 #include <RigidbodyComponent.h>
 #include "Vector.h"
 #include <SpriteRendererComponent.h>
+#include <DamageableComponent.h>
 
 namespace RogaliqueGame
 {
@@ -20,7 +21,12 @@ namespace RogaliqueGame
         Engine::GameObject* gameObject;
         float moveSpeed;
         float detectionRange;
+        float attackRange;
+        float attackCooldown;
+        float currentCooldown;
+        float attackDamage;
 
         void FindAndChasePlayer();
+        void AttackPlayer(Engine::GameObject* player);
     };
 }
