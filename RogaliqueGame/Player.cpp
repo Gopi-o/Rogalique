@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Logger.h"
 #include "SoundComponent.h"
 #include <ResourceSystem.h>
 #include <filesystem>
@@ -11,7 +12,6 @@ namespace RogaliqueGame
 	{
 		gameObject = Engine::GameWorld::Instance()->CreateGameObject();
 		gameObject->SetTag("Player");
-
 		if (!gameObject) {
 			std::cout << "Player::Update: gameObject is nullptr!" << std::endl;
 			return;
@@ -29,12 +29,14 @@ namespace RogaliqueGame
 
 		
 		std::string soundPath = "Resources\\Sounds\\Death.wav";
-		/*if (!std::filesystem::exists(soundPath))
+		if (std::filesystem::exists(soundPath))
 		{
-			std::cout << "Sound file does not exist at path: " << soundPath << std::endl;
+			LOG_INFO("Sound file does not exist at path");
+
+			/*std::cout << "Sound file does not exist at path: " << soundPath << std::endl;
 			std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
-			return;
-		}*/
+			return;*/
+		}
 
 		if (!soundComponent->LoadFromFile(soundPath))
 		{

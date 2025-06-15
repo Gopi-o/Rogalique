@@ -4,6 +4,7 @@
 //#include "Application.h"
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Logger.h"
 #include "GameEngine.h"
 #include "ResourceSystem.h"
 #include "DeveloperLevel.h"
@@ -19,6 +20,11 @@ int main()
 	FILE* f;
 	freopen_s(&f, "CONOUT$", "w", stdout);
 	freopen_s(&f, "CONOUT$", "w", stderr);
+
+	setupLogger();
+
+	LOG_INFO("Started");
+
 
 	Engine::RenderSystem::Instance()->SetMainWindow(new sf::RenderWindow(sf::VideoMode(1280, 720), "My Game Roguelike"));
 
