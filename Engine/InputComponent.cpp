@@ -10,6 +10,7 @@ namespace Engine
 	{
 		VerticalAxis = 0.f;
 		horizontalAxis = 0.f;
+		isAttack = false;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
@@ -30,6 +31,11 @@ namespace Engine
 		{
 			horizontalAxis += 1.f;
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			isAttack = true;
+		}
 	}
 
 	void InputComponent::Render()
@@ -42,5 +48,9 @@ namespace Engine
 	float InputComponent::GetVerticalAxis() const
 	{
 		return VerticalAxis;
+	}
+	bool InputComponent::IsAttack() const
+	{
+		return isAttack;
 	}
 }

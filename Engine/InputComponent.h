@@ -14,10 +14,12 @@ namespace Engine
 
 			float GetHorizontalAxis() const;
 			float GetVerticalAxis() const;
+			bool IsAttack() const;
 
 	private:
 		float horizontalAxis = 0.f;
 		float VerticalAxis = 0.f;
+		bool isAttack = false;
 	};
 }
 
