@@ -1,16 +1,15 @@
 ﻿// ©2023, XYZ School. All rights reserved.
 // Authored by Aleksandr Rybalka (polterageist@gmail.com)
 
-//#include "Application.h"
+// #include "Application.h"
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "Logger.h"
-#include "GameEngine.h"
-#include "ResourceSystem.h"
+#include <Systems/Logger.h>
+#include <Core/GameEngine/GameEngine.h>
+#include <Systems/Resource/ResourceSystem.h>
 #include "DeveloperLevel.h"
 #include <iostream>
 #include <windows.h>
-
 
 using namespace RogaliqueGame;
 
@@ -24,7 +23,6 @@ int main()
 	setupLogger();
 
 	LOG_INFO("Started");
-
 
 	Engine::RenderSystem::Instance()->SetMainWindow(new sf::RenderWindow(sf::VideoMode(1280, 720), "My Game Roguelike"));
 

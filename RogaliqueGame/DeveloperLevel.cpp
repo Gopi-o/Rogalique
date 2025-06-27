@@ -1,8 +1,9 @@
 #include "DeveloperLevel.h"
 #include "Enemy.h"
-#include "ResourceSystem.h"
+#include <Systems/Resource/ResourceSystem.h>
 #include <filesystem>
-
+#include <Systems/Logger.h>
+#include <Components/Render/MazeGeneratorComponent.h>
 
 using namespace Engine;
 
@@ -12,15 +13,23 @@ namespace RogaliqueGame
 	void DeveloperLevel::Start()
 	{
 		std::string soundPath = "Resources/Textures/wall.jpg";
-		
 
 		ResourceSystem::Instance()->LoadTexture("wall", "Resources/Textures/wall.jpg");
 		ResourceSystem::Instance()->LoadTexture("floor", "Resources/Textures/floor.png");
-
+		ResourceSystem::Instance()->LoadTexture("start", "Resources/Textures/start.png");
+		ResourceSystem::Instance()->LoadTexture("exit", "Resources/Textures/exit.png");
 
 		CreateLevel();
 
 		player = std::make_shared<Player>();
+		auto plObject = player->GetGameObject();
+
+		auto transform = plObject->GetComponent<TransformComponent>();
+		if (transform)
+		{
+			transform->SetWorldPosition(130, -80);
+		}
+
 		CreateEnemy();
 	}
 	void DeveloperLevel::Restart()
@@ -48,25 +57,18 @@ namespace RogaliqueGame
 
 	void DeveloperLevel::CreateLevel()
 	{
-		LevelEditor::Instance()->CreateWall({ 0, 350 }, 1280, 32); // Верхняя стена
-		LevelEditor::Instance()->CreateWall({ 0, -350 }, 1280, 32); // Нижняя стена
-		LevelEditor::Instance()->CreateWall({ -632, 0 }, 32, 720); // Левая стена
-		LevelEditor::Instance()->CreateWall({ 632, 0 }, 32, 720); // Правая стена
+		auto mazeGeneratorObj = GameWorld::Instance()->CreateGameObject();
+		mazeGeneratorObj->SetTag("MazeGenerator");
+		auto mazeGenerator = mazeGeneratorObj->AddComponent<MazeGeneratorComponent>();
 
-		// Пол
-		LevelEditor::Instance()->CreateFloor({ 0, 0 }, 1240, 650);
-
-		// Создаем дополнительные стены для создания комнат
-		LevelEditor::Instance()->CreateWall({ 400, 200 }, 32, 300); // Вертикальная стена
-		LevelEditor::Instance()->CreateWall({ 400, 200 }, 400, 32); // Горизонтальная стена
+		mazeGenerator->Generate(5, 5);
 	}
 
 	void DeveloperLevel::SaveCurrentLevel()
 	{
-		std::filesystem::create_directories("Levels");
 
 		std::filesystem::create_directories("Levels");
-		LevelEditor::Instance()->SaveLevel("developer_level");;
+		LevelEditor::Instance()->SaveLevel("developer_level");
 	}
 
 	void DeveloperLevel::LoadLevel(const std::string& levelName)
@@ -92,4 +94,4 @@ namespace RogaliqueGame
 
 		enemies.push_back(enemy);
 	}
-}
+} // namespace RogaliqueGame

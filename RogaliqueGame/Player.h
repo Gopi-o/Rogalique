@@ -1,13 +1,11 @@
 #pragma once
-#include "CameraComponent.h"
-#include "GameWorld.h"
-#include "SpriteRendererComponent.h"
-#include "RenderSystem.h"
-#include "InputComponent.h"
-#include "GameObject.h"
-#include "DamageableComponent.h"
-
-
+#include <Components/Render/Camera/CameraComponent.h>
+#include <Core/GameWorld/GameWorld.h>
+#include <Components/Render/SpriteRenderer/SpriteRendererComponent.h>
+#include <Systems/Render/RenderSystem.h>
+#include <Components/GamePlay/Input/InputComponent.h>
+#include <Core/GameObject/GameObject.h>
+#include <Components/GamePlay/Damageable/DamageableComponent.h>
 
 namespace RogaliqueGame
 {
@@ -21,13 +19,11 @@ namespace RogaliqueGame
 	private:
 		Engine::GameObject* gameObject;
 		float moveSpeed;
-		float attackRange;       
-		float attackCooldown;     
-		float currentCooldown;    
-		float attackDamage;       
+		float attackRange;
+		float attackCooldown;
+		float currentCooldown;
+		float attackDamage;
 
 		void Attack();
 	};
-}
-
-
+} // namespace RogaliqueGame

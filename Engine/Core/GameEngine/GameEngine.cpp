@@ -1,0 +1,60 @@
+#include "pch.h"
+#include "GameEngine.h"
+#include <iostream>
+#include "Core/GameWorld/GameWorld.h"
+#include <Systems/Render/RenderSystem.h>
+#include <Systems/Physics/PhysicsSystem.h>
+
+namespace Engine
+{
+	GameEngine* GameEngine::Instance()
+	{
+		static GameEngine instance;
+		return &instance;
+	}
+
+	GameEngine::GameEngine()
+	{
+		unsigned int seed = (unsigned int)time(nullptr);
+		srand(seed);
+	}
+
+	void GameEngine::Run()
+	{
+		sf::Clock gameClock;
+		sf::Event event;
+
+		while (RenderSystem::Instance()->GetMainWindow().isOpen())
+		{
+			sf::Time dt = gameClock.restart();
+			float deltaTime = dt.asSeconds();
+
+			while (RenderSystem::Instance()->GetMainWindow().pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+				{
+					RenderSystem::Instance()->GetMainWindow().close();
+				}
+			}
+
+			if (!RenderSystem::Instance()->GetMainWindow().isOpen())
+			{
+				break;
+			}
+
+			RenderSystem::Instance()->GetMainWindow().clear();
+
+			if (currentScene)
+			{
+				currentScene->Update(deltaTime);
+			}
+
+			GameWorld::Instance()->Update(deltaTime);
+			PhysicsSystem::Instance()->Update();
+			GameWorld::Instance()->Render();
+			GameWorld::Instance()->LateUpdate();
+
+			RenderSystem::Instance()->GetMainWindow().display();
+		}
+	}
+} // namespace Engine

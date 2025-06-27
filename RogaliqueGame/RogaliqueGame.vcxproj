@@ -159,52 +159,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
     <ClCompile Include="DeveloperLevel.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateData.cpp" />
-    <ClCompile Include="GameStateGameWin.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameMain.cpp" />
-    <ClCompile Include="GameStatePauseMenu.cpp" />
     <ClCompile Include="GameStateGameOver.cpp" />
+    <ClCompile Include="GameStateGameWin.cpp" />
     <ClCompile Include="GameStateMainMenu.cpp" />
+    <ClCompile Include="GameStatePauseMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
     <ClCompile Include="GameStateRecords.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="UnitStatsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
     <ClInclude Include="DeveloperLevel.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateData.h" />
+    <ClInclude Include="GameStateGameOver.h" />
     <ClInclude Include="GameStateGameWin.h" />
+    <ClInclude Include="GameStateMainMenu.h" />
+    <ClInclude Include="GameStatePauseMenu.h" />
+    <ClInclude Include="GameStatePlaying.h" />
+    <ClInclude Include="GameStateRecords.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="Memento.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="randomizer.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameSettings.h" />
-    <ClInclude Include="GameStatePauseMenu.h" />
-    <ClInclude Include="GameStateGameOver.h" />
-    <ClInclude Include="GameStateMainMenu.h" />
-    <ClInclude Include="GameStatePlaying.h" />
-    <ClInclude Include="GameStateRecords.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Storage\Enums\RoomType.h" />
     <ClInclude Include="UnitStatsComponent.h" />
-    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

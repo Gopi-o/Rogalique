@@ -2,14 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 
-namespace RogaliqueGame {
-	
+namespace RogaliqueGame
+{
+
 	class Application
 	{
 	public:
 		Application(const Application& app) = delete;
-		Application& operator= (const Application&) = delete;
-		
+		Application& operator=(const Application&) = delete;
+
 		static Application& Instance();
 
 		void Run();
@@ -25,6 +26,4 @@ namespace RogaliqueGame {
 		sf::RenderWindow window;
 	};
 
-}
-
-
+} // namespace RogaliqueGame

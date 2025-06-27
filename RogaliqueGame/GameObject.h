@@ -2,8 +2,7 @@
 #include "SFML/Graphics.hpp"
 
 
-namespace RogaliqueGame
-{
+namespace RogaliqueGame {
 	class GameObject
 	{
 	public:
@@ -11,14 +10,14 @@ namespace RogaliqueGame
 
 
 		virtual ~GameObject() = default;
-		
+
 		virtual void Update(float timeDelta) = 0;
 		virtual void Draw(sf::RenderWindow& window);
 
 		const sf::Vector2f& GetPosition() const { return sprite.getPosition(); }
 		sf::FloatRect GetRect() const { return sprite.getGlobalBounds(); }
 		virtual void restart();
-	
+
 	protected:
 		sf::Sprite sprite;
 		sf::Texture texture;

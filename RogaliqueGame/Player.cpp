@@ -1,12 +1,12 @@
 #include "Player.h"
-#include "Logger.h"
-#include <ResourceSystem.h>
-#include <SoundManagerComponent.h>
+#include <Systems/Logger.h>
+#include <Systems/Resource/ResourceSystem.h>
+#include <Components/Sound/SoundManagerComponent.h>
 #include <filesystem>
-#include <LevelEditor.h>
+#include <Editor/LevelEditor.h>"
 #include "UnitStatsComponent.h"
-#include <EffectComponent.h>
-
+#include <Components/GamePlay/Effect/EffectComponent.h>
+#include <Components/Physics/Actor/A_test/LevelPointsComponent.h>
 
 namespace RogaliqueGame
 {
@@ -14,11 +14,12 @@ namespace RogaliqueGame
 	{
 		gameObject = Engine::GameWorld::Instance()->CreateGameObject();
 		gameObject->SetTag("Player");
-		if (!gameObject) {
+		if (!gameObject)
+		{
 			LOG_FATAL("Player::Constructor: gameObject is nullptr!");
 			return;
 		}
-		
+
 		// Добавляем компоненты
 		auto transform = gameObject->AddComponent<Engine::TransformComponent>();
 		auto rigidbody = gameObject->AddComponent<Engine::RigidbodyComponent>();
@@ -40,83 +41,100 @@ namespace RogaliqueGame
 			std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
 			return;*/
 		}
-		
-
 
 		soundManager->AddSound("ambient", "Resources\\Sounds\\swamp_low_quality.wav", 10.0f, true);
 		soundManager->AddSound("hit", "Resources\\Sounds\\AppleEat.wav", 50.0f, false);
 
 		soundManager->PlaySound("ambient");
 
-
-
 		UnitStats->SetHealth(550.f);
 		UnitStats->SetArmor(20.f);
-		attackRange = 100.0f;        
-		attackCooldown = 2.6f;       
-		currentCooldown = 0.0f;      
+		attackRange = 100.0f;
+		attackCooldown = 2.6f;
+		currentCooldown = 0.0f;
 		attackDamage = 20.0f;
 
 		LOG_INFO(std::to_string(UnitStats->GetHealth()));
 		LOG_INFO(std::to_string(UnitStats->GetArmor()));
 
+		auto& eventSystem = Engine::EventSystem::GetInstance();
+		
+		eventSystem.Subscribe("LevelStartEvent",
+			[this](const Engine::EventsTemp& event) {
+				LOG_INFO("LevelStartEvent received!");
+				const auto& startEvent = static_cast<const Engine::LevelPointsComponent::LevelStartEvent&>(event);
+				LOG_INFO("Player detected level start point");
+			});
+		
+
+		Engine::EventSystem::GetInstance().Subscribe("LevelEndEvent",
+			[this](const Engine::EventsTemp& event) {
+				const auto& endEvent = static_cast<const Engine::LevelPointsComponent::LevelEndEvent&>(event);
+				if (endEvent.levelCompleted)
+				{
+					LOG_INFO("Player completed the level!");
+				}
+				else
+				{
+					LOG_WARN("Player reached exit but conditions not met");
+				}
+			});
 
 		Engine::EventSystem::GetInstance().Subscribe("DamageEvent",
 			[this](const Engine::EventsTemp& event) {
 				const auto& damageEvent = static_cast<const Engine::DamageEvent&>(event);
-				if (damageEvent.GetTarget() == this->gameObject) {
-					
+				if (damageEvent.GetTarget() == this->gameObject)
+				{
+
 					auto soundManager = gameObject->GetComponent<Engine::SoundManagerComponent>();
-					if (soundManager) {
+					if (soundManager)
+					{
 						LOG_INFO("SoundManager found, attempting to play hit sound");
 						soundManager->PlaySound("hit");
 					}
-					else {
+					else
+					{
 						LOG_ERROR("SoundManager not found!");
 					}
 
-
-
 					auto stats = gameObject->GetComponent<UnitStatsComponent>();
-					if (stats) {
+					if (stats)
+					{
 						float currentHealth = stats->GetHealth();
 						stats->SetHealth(currentHealth - damageEvent.GetDamage());
-						LOG_INFO("Player took " + std::to_string(damageEvent.GetDamage()) +
-							" damage. Health: " + std::to_string(stats->GetHealth()));
+						LOG_INFO("Player took " + std::to_string(damageEvent.GetDamage()) + " damage. Health: " + std::to_string(stats->GetHealth()));
 
 						auto effect = gameObject->GetComponent<Engine::EffectComponent>();
-						if (effect) {
-							effect->AddHitEffect(0.2f); 
+						if (effect)
+						{
+							effect->AddHitEffect(0.2f);
 						}
 
 						// смерть
-						if (stats->GetHealth() <= 0) {
+						if (stats->GetHealth() <= 0)
+						{
 							LOG_INFO("Player died!");
 						}
 					}
-					else {
+					else
+					{
 						LOG_ERROR("UnitStats component not found");
 					}
 				}
 			});
-		
-		
 
-
-
-		
 		playerRenderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("ball"));
 		playerRenderer->SetPixelSize(32, 32);
 
 		playerCamera->SetBaseResolution(1280, 720);
 
-
-		moveSpeed = 0.6f;
+		moveSpeed = 2.0f;
 	}
 
 	void Player::Update(float deltaTime)
 	{
-		if (currentCooldown > 0) {
+		if (currentCooldown > 0)
+		{
 			currentCooldown -= deltaTime;
 		}
 
@@ -132,11 +150,13 @@ namespace RogaliqueGame
 
 			rigidbody->SetLinearVelocity(movement);
 
-			if (input->IsAttack() && currentCooldown <= 0) {
+			if (input->IsAttack() && currentCooldown <= 0)
+			{
 				Attack();
 			}
 		}
-		else {
+		else
+		{
 			LOG_ERROR("Input or Rigidbody component not found");
 		}
 	}
@@ -146,16 +166,15 @@ namespace RogaliqueGame
 		return gameObject;
 	}
 
-
 	void Player::Attack()
 	{
 		auto transform = gameObject->GetComponent<Engine::TransformComponent>();
-		if (!transform) return;
+		if (!transform)
+			return;
 
 		auto objectsInRange = Engine::GameWorld::Instance()->FindObjectsInRadius(
 			transform->GetWorldPosition(),
-			attackRange
-		);
+			attackRange);
 
 		for (auto obj : objectsInRange)
 		{
@@ -167,7 +186,8 @@ namespace RogaliqueGame
 					damageable->TakeDamage(attackDamage, gameObject);
 
 					auto effect = obj->GetComponent<Engine::EffectComponent>();
-					if (effect) {
+					if (effect)
+					{
 						effect->AddHitEffect(0.2f);
 					}
 				}
@@ -175,15 +195,17 @@ namespace RogaliqueGame
 		}
 
 		auto effect = gameObject->GetComponent<Engine::EffectComponent>();
-		if (effect) {
+		if (effect)
+		{
 			effect->AddHitEffect(0.1f);
 		}
 
 		auto soundManager = gameObject->GetComponent<Engine::SoundManagerComponent>();
-		if (soundManager) {
+		if (soundManager)
+		{
 			soundManager->PlaySound("hit");
 		}
 
 		currentCooldown = attackCooldown;
 	}
-}
+} // namespace RogaliqueGame

@@ -1,6 +1,5 @@
 #pragma once
-#include "StatsComponent.h"
-
+#include <Components/GamePlay/Stats/StatsComponent.h>
 
 namespace RogaliqueGame
 {
@@ -35,5 +34,4 @@ namespace RogaliqueGame
 		static constexpr const char* KEY_STATUS = "status";
 		static constexpr const char* KEY_ALIVE = "isAlive";
 	};
-}
-
+} // namespace RogaliqueGame
