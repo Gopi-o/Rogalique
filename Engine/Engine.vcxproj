@@ -168,6 +168,7 @@
     <ClInclude Include="Components\Physics\SpriteCollider\StaticColliderComponent.h" />
     <ClInclude Include="Components\Render\MazeGeneratorComponent.h" />
     <ClInclude Include="Components\Physics\Actor\A_test\LevelPointsComponent.h" />
+    <ClInclude Include="Math\RandomHelper.h" />
     <ClInclude Include="Systems\FileMaster\FileMaster.h" />
     <ClInclude Include="Systems\Event\EventsTemp.h" />
     <ClInclude Include="Systems\Event\EventSystem.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="Components\Physics\SpriteCollider\StaticColliderComponent.cpp" />
     <ClCompile Include="Components\Render\MazeGeneratorComponent.cpp" />
     <ClCompile Include="Components\Physics\Actor\A_test\LevelPointsComponent.cpp" />
+    <ClCompile Include="Math\RandomHelper.cpp" />
     <ClCompile Include="Systems\FileMaster\FileMaster.cpp" />
     <ClCompile Include="Systems\Event\EventsTemp.cpp" />
     <ClCompile Include="Systems\Event\EventSystem.cpp" />

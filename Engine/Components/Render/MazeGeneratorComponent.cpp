@@ -2,7 +2,7 @@
 #include "MazeGeneratorComponent.h"
 #include <Editor/LevelEditor.h>
 #include <Systems/Logger.h>
-#include <random>
+#include <Math/RandomHelper.h>
 
 namespace Engine
 {
@@ -36,8 +36,11 @@ namespace Engine
 		mazeGrid.resize(mazeHeight, std::vector<Cell>(mazeWidth));
 
 		// Начальная позиция для генерации
-		int startX = rand() % mazeWidth;
-		int startY = rand() % mazeHeight;
+		int startX = RandomHelper::Int(0, mazeWidth - 1);
+		int startY = RandomHelper::Int(0, mazeHeight - 1);
+		/*int startX = rand() % mazeWidth;
+		int startY = rand() % mazeHeight;*/
+		mazeGrid[startY][startX].depth = 0;
 
 		generationStack.push(Vector2Df(startX, startY));
 	}
@@ -45,7 +48,9 @@ namespace Engine
 	void MazeGeneratorComponent::GenerateMazeDFS()
 	{
 		std::vector<std::vector<bool>> visited(mazeHeight, std::vector<bool>(mazeWidth, false));
-		visited[generationStack.top().y][generationStack.top().x] = true;
+		auto start = generationStack.top();
+		mazeGrid[start.y][start.x].depth = 0; // Стартовая клетка имеет глубину 0
+		visited[start.y][start.x] = true;
 
 		while (!generationStack.empty())
 		{
@@ -57,8 +62,12 @@ namespace Engine
 			{
 				generationStack.push(current);
 
-				// Случайный выбор соседа
-				auto next = neighbors[rand() % neighbors.size()];
+				// Выбираем случайного соседа
+				auto next = neighbors[RandomHelper::Int(0, neighbors.size() - 1)];
+
+				// Устанавливаем глубину (текущая глубина + 1)
+				mazeGrid[next.y][next.x].depth = mazeGrid[current.y][current.x].depth + 1;
+				// auto next = neighbors[rand() % neighbors.size()];
 
 				// Удаляем стену между текущей и следующей клеткой
 				if (next.x == current.x + 1)
@@ -123,7 +132,7 @@ namespace Engine
 
 		LOG_INFO("Start point created at: (" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ")");
 
-		Vector2Df exitPos((mazeWidth - 1) * cellSize, (mazeHeight - 1) * cellSize);
+		Vector2Df exitPos = FindFurthestPoint();
 		EndPoint = LevelEditor::Instance()->CreatePointMarker(exitPos, "ExitPoint");
 		EndPoint->GetComponent<TransformComponent>()->SetWorldPosition(exitPos);
 		EndPoint->GetComponent<SpriteColliderComponent>();
@@ -131,6 +140,26 @@ namespace Engine
 		exitComp->SetEndPoint(EndPoint);
 
 		LOG_INFO("Exit point created at: (" + std::to_string(exitPos.x) + ", " + std::to_string(exitPos.y) + ")");
+	}
+
+	Vector2Df MazeGeneratorComponent::FindFurthestPoint()
+	{
+		Vector2Df furthestPoint(0, 0);
+		int maxDepth = 0;
+
+		for (int y = 0; y < mazeHeight; y++)
+		{
+			for (int x = 0; x < mazeWidth; x++)
+			{
+				if (mazeGrid[y][x].depth > maxDepth)
+				{
+					maxDepth = mazeGrid[y][x].depth;
+					furthestPoint = Vector2Df(x * cellSize, y * cellSize);
+				}
+			}
+		}
+
+		return furthestPoint;
 	}
 
 	void MazeGeneratorComponent::CreateMazeWalls()

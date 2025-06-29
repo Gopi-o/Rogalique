@@ -26,6 +26,7 @@ namespace Engine
 			bool southWall = true;
 			bool eastWall = true;
 			bool westWall = true;
+			int depth = -1;
 		};
 
 		// Параметры лабиринта
@@ -51,6 +52,7 @@ namespace Engine
 		// Вспомогательные методы
 		std::vector<Vector2Df> GetUnvisitedNeighbors(int x, int y, const std::vector<std::vector<bool>>& visited);
 		void SetStartAndEndPoints();
+		Vector2Df FindFurthestPoint();
 		void SpawnEnemies(int enemyCount);
 	};
 } // namespace Engine
