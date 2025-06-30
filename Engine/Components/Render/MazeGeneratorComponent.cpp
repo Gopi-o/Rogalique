@@ -23,12 +23,59 @@ namespace Engine
 		GenerateMazeDFS();
 		CreateMazeWalls();
 		SetStartAndEndPoints();
+		GenerateSpawnPoints(5, 3);
 	}
 
 	void MazeGeneratorComponent::Clear()
 	{
 		// Очистка ранее сгенерированных стен
 		// (реализация зависит от вашей системы)
+	}
+
+	Vector2Df MazeGeneratorComponent::GetStartPointPos() const
+	{
+		Vector2Df pos;
+		pos.x = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().x - 35.f;
+		pos.y = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().y - 35.f;
+
+		return pos;
+	}
+
+	void MazeGeneratorComponent::GenerateSpawnPoints(int enemyCount, int itemCount)
+	{
+		enemySpawnPoints.clear();
+		itemSpawnPoints.clear();
+
+		std::vector<Vector2Df> validPointsPosition;
+
+		for (int x = 0; x < mazeWidth; x++)
+		{
+			for (int y = 0; y < mazeHeight; y++)
+			{
+				Vector2Df pos(x * cellSize, y * cellSize);
+
+				if (pos == StartPoint->GetComponent<TransformComponent>()->GetWorldPosition() || pos == EndPoint->GetComponent<TransformComponent>()->GetWorldPosition())
+				{
+					continue;
+				}
+
+				validPointsPosition.push_back(pos);
+			}
+		}
+
+		for (int i = 0; i < enemyCount && !validPointsPosition.empty(); i++)
+		{
+			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
+			enemySpawnPoints.push_back(validPointsPosition[index]);
+			validPointsPosition.erase(validPointsPosition.begin() + index);
+		}
+
+		for (int i = 0; i < itemCount && !validPointsPosition.empty(); i++)
+		{
+			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
+			itemSpawnPoints.push_back(validPointsPosition[index]);
+			validPointsPosition.erase(validPointsPosition.begin() + index);
+		}
 	}
 
 	void MazeGeneratorComponent::InitializeGrid()

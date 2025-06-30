@@ -19,6 +19,11 @@ namespace Engine
 		void Update(float deltaTime) override {}
 		void Render() override {}
 
+		// Вспомогательные методы
+		std::vector<Vector2Df> GetEnemySpawnPoints() const { return enemySpawnPoints; }
+		std::vector<Vector2Df> GetItemSpawnPoints() const { return itemSpawnPoints; }
+		Vector2Df GetStartPointPos() const;
+
 	private:
 		struct Cell
 		{
@@ -38,6 +43,9 @@ namespace Engine
 		// Вспомогательные данные
 		GameObject* StartPoint = nullptr;
 		GameObject* EndPoint = nullptr;
+		void GenerateSpawnPoints(int enemyCount, int itemCount);
+		std::vector<Vector2Df> enemySpawnPoints;
+		std::vector<Vector2Df> itemSpawnPoints;
 
 		// Данные лабиринта
 		std::vector<std::vector<Cell>> mazeGrid;

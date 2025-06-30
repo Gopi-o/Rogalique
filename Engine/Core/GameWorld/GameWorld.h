@@ -17,6 +17,7 @@ namespace Engine
 		void Clear();
 
 		GameObject* FindObjectByName(const std::string& name);
+		GameObject* FindObjectByTag(const std::string& tag);
 		GameObject* FindClosestObject(const Vector2Df& position, float maxDistance = -1.0f);
 		std::vector<GameObject*> FindObjectsInRadius(const Vector2Df& position, float radius);
 

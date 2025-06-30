@@ -30,7 +30,36 @@ namespace RogaliqueGame
 			transform->SetWorldPosition(130, -80);
 		}
 
-		CreateEnemy();
+		auto mazeGeneratorObj = GameWorld::Instance()->FindObjectByTag("MazeGenerator");
+		if (mazeGeneratorObj)
+		{
+			auto mazeGenerator = mazeGeneratorObj->GetComponent<MazeGeneratorComponent>();
+			if (mazeGenerator)
+			{
+				auto startPoint = mazeGenerator->GetStartPointPos();
+				LOG_INFO("player Pos after create level (" + std::to_string(startPoint.x) + ", " + std::to_string(startPoint.y) + ")");
+				auto transform = plObject->GetComponent<TransformComponent>();
+				if (transform)
+				{
+					transform->SetWorldPosition(startPoint.x, startPoint.y);
+				}
+
+				auto spawnPoints = mazeGenerator->GetEnemySpawnPoints();
+				for (const auto& spawnPos : spawnPoints)
+				{
+					auto enemy = std::make_shared<Enemy>();
+					auto enemyObj = enemy->GetGameObject();
+					auto enemyTransform = enemyObj->GetComponent<TransformComponent>();
+					if (enemyTransform)
+					{
+						enemyTransform->SetWorldPosition(spawnPos);
+						enemies.push_back(enemy);
+					}
+				}
+			}
+		}
+
+		// CreateEnemy();
 	}
 	void DeveloperLevel::Restart()
 	{

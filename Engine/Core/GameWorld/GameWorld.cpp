@@ -25,7 +25,6 @@ namespace Engine
 		}
 	}
 
-
 	void GameWorld::LateUpdate()
 	{
 		for (int i = markedToDestroyGameObject.size() - 1; i >= 0; i--)
@@ -48,7 +47,7 @@ namespace Engine
 
 	void GameWorld::Clear()
 	{
-		for (int i = gameObjects.size() -1; i >= 0; i--)
+		for (int i = gameObjects.size() - 1; i >= 0; i--)
 		{
 			DestroyGameObjectImmediative(gameObjects[i]);
 		}
@@ -58,14 +57,25 @@ namespace Engine
 	{
 		for (auto obj : gameObjects)
 		{
-			if (obj->GetName() == name) {
+			if (obj->GetName() == name)
+			{
 				return obj;
 			}
 		}
 		return nullptr;
 	}
 
-	
+	GameObject* GameWorld::FindObjectByTag(const std::string& tag)
+	{
+		for (auto obj : gameObjects)
+		{
+			if (obj->GetTag() == tag)
+			{
+				return obj;
+			}
+		}
+		return nullptr;
+	}
 
 	GameObject* GameWorld::FindClosestObject(const Vector2Df& position, float maxDistance)
 	{
@@ -76,13 +86,12 @@ namespace Engine
 		for (auto obj : gameObjects)
 		{
 			auto transform = obj->GetComponent<TransformComponent>();
-			if (!transform) continue;
+			if (!transform)
+				continue;
 
 			Vector2Df objPos = transform->GetWorldPosition();
 			float distance = std::sqrt(
-				(position.x - objPos.x) * (position.x - objPos.x) +
-				(position.y - objPos.y) * (position.y - objPos.y)
-			);
+				(position.x - objPos.x) * (position.x - objPos.x) + (position.y - objPos.y) * (position.y - objPos.y));
 
 			if (maxDistance < 0 || distance <= maxDistance)
 			{
@@ -106,12 +115,12 @@ namespace Engine
 		for (auto obj : gameObjects)
 		{
 			auto transform = obj->GetComponent<TransformComponent>();
-			if (!transform) continue;
+			if (!transform)
+				continue;
 
 			Vector2Df objPos = transform->GetWorldPosition();
 			float distanceSquared =
-				(position.x - objPos.x) * (position.x - objPos.x) +
-				(position.y - objPos.y) * (position.y - objPos.y);
+				(position.x - objPos.x) * (position.x - objPos.x) + (position.y - objPos.y) * (position.y - objPos.y);
 
 			if (distanceSquared <= radiusSquared)
 			{
@@ -129,4 +138,4 @@ namespace Engine
 
 		delete gameObject;
 	}
-}
+} // namespace Engine
