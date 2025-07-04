@@ -72,6 +72,8 @@ namespace Engine
 	{
 		for (auto& component : components)
 		{
+			if (!shouldRender)
+				return;
 			component->Render();
 		}
 	}
@@ -84,4 +86,4 @@ namespace Engine
 	{
 		children.erase(std::remove_if(children.begin(), children.end(), [child](GameObject* obj) { return obj == child; }), children.end());
 	}
-}
+} // namespace Engine

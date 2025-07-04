@@ -16,8 +16,6 @@ namespace Engine
 		void Update(float deltaTime) override;
 		void Render() override;
 
-		void CheckTriggers();
-
 	private:
 		const sf::Sprite* sprite;
 		sf::FloatRect previousBounds;

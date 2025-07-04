@@ -158,6 +158,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\UI\Canvas.h" />
     <ClInclude Include="Components\Physics\Actor\ActorComponent.h" />
     <ClInclude Include="Components\Render\Camera\CameraComponent.h" />
     <ClInclude Include="Components\Physics\Collider\ColliderComponent.h" />
@@ -168,6 +169,8 @@
     <ClInclude Include="Components\Physics\SpriteCollider\StaticColliderComponent.h" />
     <ClInclude Include="Components\Render\MazeGeneratorComponent.h" />
     <ClInclude Include="Components\Physics\Actor\A_test\LevelPointsComponent.h" />
+    <ClInclude Include="Components\UI\Layout.h" />
+    <ClInclude Include="Components\UI\Image.h" />
     <ClInclude Include="Math\RandomHelper.h" />
     <ClInclude Include="Systems\FileMaster\FileMaster.h" />
     <ClInclude Include="Systems\Event\EventsTemp.h" />
@@ -201,8 +204,11 @@
     <ClInclude Include="Systems\Trigger\Trigger.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Components\Render\Wall\WallComponent.h" />
+    <ClInclude Include="Components\UI\Widget.h" />
+    <ClInclude Include="Components\UI\TextBlock.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\UI\Canvas.cpp" />
     <ClCompile Include="Components\Physics\Actor\ActorComponent.cpp" />
     <ClCompile Include="Components\Render\Camera\CameraComponent.cpp" />
     <ClCompile Include="Components\Physics\Collider\ColliderComponent.cpp" />
@@ -213,6 +219,8 @@
     <ClCompile Include="Components\Physics\SpriteCollider\StaticColliderComponent.cpp" />
     <ClCompile Include="Components\Render\MazeGeneratorComponent.cpp" />
     <ClCompile Include="Components\Physics\Actor\A_test\LevelPointsComponent.cpp" />
+    <ClCompile Include="Components\UI\Layout.cpp" />
+    <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="Math\RandomHelper.cpp" />
     <ClCompile Include="Systems\FileMaster\FileMaster.cpp" />
     <ClCompile Include="Systems\Event\EventsTemp.cpp" />
@@ -243,6 +251,8 @@
     <ClCompile Include="Components\Physics\Transform\TransformComponent.cpp" />
     <ClCompile Include="Systems\Trigger\Trigger.cpp" />
     <ClCompile Include="Components\Render\Wall\WallComponent.cpp" />
+    <ClCompile Include="Components\UI\Widget.cpp" />
+    <ClCompile Include="Components\UI\TextBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc" />

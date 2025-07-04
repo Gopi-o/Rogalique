@@ -3,11 +3,11 @@
 
 // #include "Application.h"
 #include <SFML/Graphics.hpp>
-#include "Player.h"
+#include "Core/Characters/Player.h"
 #include <Systems/Logger.h>
 #include <Core/GameEngine/GameEngine.h>
 #include <Systems/Resource/ResourceSystem.h>
-#include "DeveloperLevel.h"
+#include "Core/Levels/DeveloperLevel.h"
 #include <iostream>
 #include <windows.h>
 

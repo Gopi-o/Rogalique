@@ -11,6 +11,7 @@ namespace Engine
 	{
 	}
 
+	// Главная генерация лабиринта с параметрами
 	void MazeGeneratorComponent::Generate(int width, int height, float cellSize, float wallThickness)
 	{
 		this->mazeWidth = std::max(5, width);
@@ -26,12 +27,13 @@ namespace Engine
 		GenerateSpawnPoints(5, 3);
 	}
 
+	// Можно расширить если надо будет что-то очищать.
 	void MazeGeneratorComponent::Clear()
 	{
-		// Очистка ранее сгенерированных стен
-		// (реализация зависит от вашей системы)
+		// Например очистка сгенерированных стен
 	}
 
+	// Получени позиции стартовой точки в лабиринте
 	Vector2Df MazeGeneratorComponent::GetStartPointPos() const
 	{
 		Vector2Df pos;
@@ -41,13 +43,16 @@ namespace Engine
 		return pos;
 	}
 
+	// Генерация точек по кторым потом можно будет спавнить что-либо
 	void MazeGeneratorComponent::GenerateSpawnPoints(int enemyCount, int itemCount)
 	{
 		enemySpawnPoints.clear();
 		itemSpawnPoints.clear();
 
+		// Переменная с позициями для спавна
 		std::vector<Vector2Df> validPointsPosition;
 
+		// Получение общее количество куда можно поставить спавнер
 		for (int x = 0; x < mazeWidth; x++)
 		{
 			for (int y = 0; y < mazeHeight; y++)
@@ -63,6 +68,7 @@ namespace Engine
 			}
 		}
 
+		// Заполнение точек для установления точек для спавнеров врагов
 		for (int i = 0; i < enemyCount && !validPointsPosition.empty(); i++)
 		{
 			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
@@ -70,6 +76,7 @@ namespace Engine
 			validPointsPosition.erase(validPointsPosition.begin() + index);
 		}
 
+		// Заполнение точек для установления точек для спавнеров итемов
 		for (int i = 0; i < itemCount && !validPointsPosition.empty(); i++)
 		{
 			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
@@ -78,6 +85,7 @@ namespace Engine
 		}
 	}
 
+	// Инициализация сетки
 	void MazeGeneratorComponent::InitializeGrid()
 	{
 		mazeGrid.resize(mazeHeight, std::vector<Cell>(mazeWidth));
@@ -92,6 +100,7 @@ namespace Engine
 		generationStack.push(Vector2Df(startX, startY));
 	}
 
+	// Генерация лабиринта путем прохода в глубину
 	void MazeGeneratorComponent::GenerateMazeDFS()
 	{
 		std::vector<std::vector<bool>> visited(mazeHeight, std::vector<bool>(mazeWidth, false));
@@ -109,7 +118,7 @@ namespace Engine
 			{
 				generationStack.push(current);
 
-				// Выбираем случайного соседа
+				// Выбор случайного соседа
 				auto next = neighbors[RandomHelper::Int(0, neighbors.size() - 1)];
 
 				// Устанавливаем глубину (текущая глубина + 1)
@@ -163,6 +172,7 @@ namespace Engine
 		return neighbors;
 	}
 
+	// Установление точек старта и конца
 	void MazeGeneratorComponent::SetStartAndEndPoints()
 	{
 		if (StartPoint)
@@ -173,7 +183,7 @@ namespace Engine
 		Vector2Df startPos(0, 0);
 		StartPoint = LevelEditor::Instance()->CreatePointMarker(startPos, "StartPoint");
 		StartPoint->GetComponent<TransformComponent>()->SetWorldPosition(startPos);
-		StartPoint->GetComponent<SpriteColliderComponent>();
+		// StartPoint->GetComponent<SpriteColliderComponent>();
 		auto startComp = StartPoint->AddComponent<LevelPointsComponent>();
 		startComp->SetStartPoint(StartPoint);
 

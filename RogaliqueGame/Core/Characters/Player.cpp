@@ -4,7 +4,7 @@
 #include <Components/Sound/SoundManagerComponent.h>
 #include <filesystem>
 #include <Editor/LevelEditor.h>"
-#include "UnitStatsComponent.h"
+#include "../../Stats/UnitStatsComponent.h"
 #include <Components/GamePlay/Effect/EffectComponent.h>
 #include <Components/Physics/Actor/A_test/LevelPointsComponent.h>
 
@@ -58,14 +58,13 @@ namespace RogaliqueGame
 		LOG_INFO(std::to_string(UnitStats->GetArmor()));
 
 		auto& eventSystem = Engine::EventSystem::GetInstance();
-		
+
 		eventSystem.Subscribe("LevelStartEvent",
 			[this](const Engine::EventsTemp& event) {
 				LOG_INFO("LevelStartEvent received!");
 				const auto& startEvent = static_cast<const Engine::LevelPointsComponent::LevelStartEvent&>(event);
 				LOG_INFO("Player detected level start point");
 			});
-		
 
 		Engine::EventSystem::GetInstance().Subscribe("LevelEndEvent",
 			[this](const Engine::EventsTemp& event) {

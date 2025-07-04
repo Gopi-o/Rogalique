@@ -2,9 +2,10 @@
 #include <iostream>
 #include <array>
 #include <Core/Scene.h>
-#include "Player.h"
-#include "Enemy.h"
+#include "../Characters/Player.h"
+#include "../Characters/Enemy.h"
 #include <Editor/LevelEditor.h>
+#include "../UI/GameHUD.h"
 
 using namespace Engine;
 
@@ -26,5 +27,6 @@ namespace RogaliqueGame
 	private:
 		std::shared_ptr<Player> player;
 		std::vector<std::shared_ptr<Enemy>> enemies;
+		std::shared_ptr<GameHUD> hud;
 	};
 } // namespace RogaliqueGame

@@ -5,7 +5,7 @@
 #include <Editor/LevelEditor.h>
 #include <Systems/Logger.h>
 #include <Components/GamePlay/Effect/EffectComponent.h>
-#include "UnitStatsComponent.h"
+#include "../../Stats/UnitStatsComponent.h"
 #include <Components/Sound/SoundManagerComponent.h>
 
 namespace RogaliqueGame
@@ -99,7 +99,7 @@ namespace RogaliqueGame
 		auto transform = gameObject->GetComponent<Engine::TransformComponent>();
 		if (!transform)
 		{
-			LOG_ERROR("Enemy transform component is null!");
+			/*LOG_ERROR("Enemy transform component is null!");*/
 			return;
 		}
 

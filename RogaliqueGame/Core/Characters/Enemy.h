@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+
 #include <Components/Physics/Transform/TransformComponent.h>
 #include <Components/Physics/Rigidbody/RigidbodyComponent.h>
 #include <Math/Vector.h>

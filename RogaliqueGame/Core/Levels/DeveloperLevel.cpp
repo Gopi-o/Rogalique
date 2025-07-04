@@ -1,5 +1,4 @@
 #include "DeveloperLevel.h"
-#include "Enemy.h"
 #include <Systems/Resource/ResourceSystem.h>
 #include <filesystem>
 #include <Systems/Logger.h>
@@ -18,17 +17,12 @@ namespace RogaliqueGame
 		ResourceSystem::Instance()->LoadTexture("floor", "Resources/Textures/floor.png");
 		ResourceSystem::Instance()->LoadTexture("start", "Resources/Textures/start.png");
 		ResourceSystem::Instance()->LoadTexture("exit", "Resources/Textures/exit.png");
+		ResourceSystem::Instance()->LoadTexture("health_icon", "Resources/Textures/BodyBend.png");
 
 		CreateLevel();
 
 		player = std::make_shared<Player>();
 		auto plObject = player->GetGameObject();
-
-		auto transform = plObject->GetComponent<TransformComponent>();
-		if (transform)
-		{
-			transform->SetWorldPosition(130, -80);
-		}
 
 		auto mazeGeneratorObj = GameWorld::Instance()->FindObjectByTag("MazeGenerator");
 		if (mazeGeneratorObj)
@@ -59,6 +53,11 @@ namespace RogaliqueGame
 			}
 		}
 
+		auto hud = std::make_shared<GameHUD>();
+		hud->SetHealth(100, 100);
+		hud->SetAmmo(30, 120);
+		hud->SetEnemiesCount(static_cast<int>(enemies.size()));
+		hud->SetLevelInfo("developer");
 		// CreateEnemy();
 	}
 	void DeveloperLevel::Restart()
@@ -76,6 +75,11 @@ namespace RogaliqueGame
 		if (player)
 		{
 			player->Update(deltaTime);
+		}
+
+		if (hud)
+		{
+			hud->Update(deltaTime);
 		}
 
 		for (auto& enemy : enemies)

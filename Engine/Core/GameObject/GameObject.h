@@ -24,6 +24,9 @@ namespace Engine
 		void Update(float deltaTime);
 		void Render();
 
+		void SetShouldRender(bool shouldRender) { this->shouldRender = shouldRender; }
+		bool ShouldRender() const { return shouldRender; }
+
 		template <typename T>
 		T* AddComponent()
 		{
@@ -135,6 +138,8 @@ namespace Engine
 	private:
 		std::string name;
 		std::string tag;
+
+		bool shouldRender = true;
 
 		std::vector<GameObject*> children = {};
 		std::vector<Component*> components = {};

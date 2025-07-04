@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ResourceSystem.h"
+#include <Systems/Logger.h>
 
 namespace Engine
 {
@@ -85,6 +86,48 @@ namespace Engine
 		}
 	}
 
+	void ResourceSystem::LoadFont(const std::string& name, const std::string& path)
+	{
+		if (fonts.find(name) != fonts.end())
+		{
+			LOG_WARN("Font '" + name + "' is already loaded");
+			return;
+		}
+
+		// Пытаемся загрузить шрифт
+		sf::Font* newFont = new sf::Font();
+		if (newFont->loadFromFile(path))
+		{
+			fonts.emplace(name, newFont);
+			LOG_INFO("Font '" + name + "' loaded successfully from: " + path);
+		}
+		else
+		{
+			delete newFont;
+			LOG_ERROR("Failed to load font '" + name + "' from: " + path);
+			throw std::runtime_error("Failed to load font: " + path);
+		}
+	}
+
+	const sf::Font* ResourceSystem::GetFontShared(const std::string& name) const
+	{
+		auto it = fonts.find(name);
+		if (it != fonts.end())
+		{
+			return it->second;
+		}
+
+		LOG_ERROR("Font '" + name + "' not found in ResourceSystem");
+		throw std::runtime_error("Font not found: " + name);
+
+		// дефолтный шрифт
+		if (fonts.find("default") != fonts.end())
+		{
+			return fonts.at("default");
+		}
+		return nullptr;
+	}
+
 	const sf::Texture* ResourceSystem::GetTextureMapElementShared(const std::string& name, int elementIndex) const
 	{
 		auto textureMap = texturesMaps.find(name);
@@ -122,6 +165,32 @@ namespace Engine
 	{
 		DeleteAllTextures();
 		DeleteAllTextureMaps();
+		DeleteAllFonts();
+	}
+
+	void ResourceSystem::DeleteFont(const std::string& name)
+	{
+		auto it = fonts.find(name);
+		if (it != fonts.end())
+		{
+			delete it->second;
+			fonts.erase(it);
+			LOG_INFO("Font '" + name + "' deleted");
+		}
+		else
+		{
+			LOG_WARN("Attempt to delete non-existing font: '" + name + "'");
+		}
+	}
+
+	void ResourceSystem::DeleteAllFonts()
+	{
+		for (auto& pair : fonts)
+		{
+			delete pair.second;
+		}
+		fonts.clear();
+		LOG_INFO("All fonts deleted");
 	}
 
 	void ResourceSystem::DeleteAllTextures()
