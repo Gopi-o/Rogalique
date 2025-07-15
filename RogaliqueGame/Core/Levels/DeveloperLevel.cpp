@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <Systems/Logger.h>
 #include <Components/Render/MazeGeneratorComponent.h>
+#include "../../Stats/UnitStatsComponent.h"
 
 using namespace Engine;
 
@@ -11,13 +12,9 @@ namespace RogaliqueGame
 
 	void DeveloperLevel::Start()
 	{
-		std::string soundPath = "Resources/Textures/wall.jpg";
+		
 
-		ResourceSystem::Instance()->LoadTexture("wall", "Resources/Textures/wall.jpg");
-		ResourceSystem::Instance()->LoadTexture("floor", "Resources/Textures/floor.png");
-		ResourceSystem::Instance()->LoadTexture("start", "Resources/Textures/start.png");
-		ResourceSystem::Instance()->LoadTexture("exit", "Resources/Textures/exit.png");
-		ResourceSystem::Instance()->LoadTexture("health_icon", "Resources/Textures/BodyBend.png");
+
 
 		CreateLevel();
 
@@ -53,8 +50,12 @@ namespace RogaliqueGame
 			}
 		}
 
-		auto hud = std::make_shared<GameHUD>();
-		hud->SetHealth(100, 100);
+		hud = std::make_shared<GameHUD>();
+		if (auto stats = plObject->GetComponent<UnitStatsComponent>())
+		{
+			hud->SetHealth(static_cast<int>(stats->GetHealth()),
+				static_cast<int>(player->GetMaxHealth()));
+		}
 		hud->SetAmmo(30, 120);
 		hud->SetEnemiesCount(static_cast<int>(enemies.size()));
 		hud->SetLevelInfo("developer");

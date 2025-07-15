@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameWorld.h"
+#include <Systems/Logger.h>
 
 namespace Engine
 {
@@ -13,6 +14,8 @@ namespace Engine
 	{
 		for (int i = 0; i < gameObjects.size(); i++)
 		{
+			if (!gameObjects[i])
+				continue;
 			gameObjects[i]->Update(deltaTime);
 		}
 	}
@@ -29,8 +32,14 @@ namespace Engine
 	{
 		for (int i = markedToDestroyGameObject.size() - 1; i >= 0; i--)
 		{
+			if (i >= markedToDestroyGameObject.size())
+			{
+				LOG_ERROR("Invalid index access in GameWorld::LateUpdate()");
+				return;
+			}
 			DestroyGameObjectImmediative(markedToDestroyGameObject[i]);
 		}
+
 	}
 
 	GameObject* GameWorld::CreateGameObject()

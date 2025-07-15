@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Canvas.h"
+#include "Layout.h"
 
 namespace Engine
 {
@@ -134,7 +135,12 @@ namespace Engine
 	{
 		if (widget)
 		{
-			widget->SetPosition(GetPosition());
+			// Only set absolute position if widget isn't in a layout
+			if (!widget->GetParent() || dynamic_cast<Layout*>(widget->GetParent()) == nullptr)
+			{
+				widget->SetPosition(GetPosition() + widget->GetPosition());
+			}
+			// For widgets in layouts, the layout handles their positioning
 		}
 	}
 

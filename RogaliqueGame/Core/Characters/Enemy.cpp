@@ -7,6 +7,8 @@
 #include <Components/GamePlay/Effect/EffectComponent.h>
 #include "../../Stats/UnitStatsComponent.h"
 #include <Components/Sound/SoundManagerComponent.h>
+#include <Components/GamePlay/AttackSystems/AttackSystem.h>
+#include <filesystem>
 
 namespace RogaliqueGame
 {
@@ -16,31 +18,64 @@ namespace RogaliqueGame
 		gameObject->SetTag("Enemy");
 		LOG_INFO("Enemy created");
 
+		SetupComponents();
+		SetupEnemyStats();
+		LoadResources();
+		SetupAttackSystem();
+		SetupEventHandlers();
+	}
+
+	Enemy::~Enemy()
+	{
+	}
+
+	void Enemy::SetupComponents()
+	{
 		auto transform = gameObject->AddComponent<Engine::TransformComponent>();
 		auto rigidbody = gameObject->AddComponent<Engine::RigidbodyComponent>();
 		auto renderer = gameObject->AddComponent<Engine::SpriteRendererComponent>();
 		auto collider = gameObject->AddComponent<Engine::SpriteColliderComponent>();
 		auto damageable = gameObject->AddComponent<Engine::DamageableComponent>();
-		auto EnemyStats = gameObject->AddComponent<UnitStatsComponent>();
+		auto stats = gameObject->AddComponent<UnitStatsComponent>();
 		auto effectComponent = gameObject->AddComponent<Engine::EffectComponent>();
+		auto soundManager = gameObject->AddComponent<Engine::SoundManagerComponent>();
 
 		renderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("enemy"));
 		renderer->SetPixelSize(40, 40);
-
-		auto soundManager = gameObject->AddComponent<Engine::SoundManagerComponent>();
-
+	}
+	void Enemy::LoadResources()
+	{
+		auto soundManager = gameObject->GetComponent<Engine::SoundManagerComponent>();
 		soundManager->AddSound("kill", "Resources\\Sounds\\Kill.wav", 50.0f, false);
+	}
+	void Enemy::SetupAttackSystem()
+	{
+		auto attackSystem = gameObject->AddComponent<Engine::AttackSystem>();
 
-		moveSpeed = 0.35f;
-		detectionRange = 300.0f;
-		attackRange = 50.0f;
-		attackCooldown = 1.0f;
-		currentCooldown = 0.0f;
-		attackDamage = 10.0f;
+		Engine::AttackSystem::AttackParams basicAttack;
+		basicAttack.type = Engine::AttackSystem::AttackType::Melee;
+		basicAttack.damage = attackDamage;
+		basicAttack.range = attackRange;
+		basicAttack.cooldown = attackCooldown;
+		basicAttack.animationName = "attack_melee";
+		basicAttack.soundName = "hit";
 
-		EnemyStats->SetHealth(50.f);
-		LOG_DEBUG("Enemy stats initialized: Health=" + std::to_string(50.f) + ", AttackDamage=" + std::to_string(attackDamage) + ", AttackRange=" + std::to_string(attackRange));
+		attackSystem->AddAttack("basic", basicAttack);
+	}
 
+	void Enemy::SetupEnemyStats()
+	{
+		auto stats = gameObject->GetComponent<UnitStatsComponent>();
+		stats->SetHealth(enemyHealth);
+		stats->SetArmor(enemyArmor);
+
+		LOG_INFO("Enemy stats - Health: " + std::to_string(stats->GetHealth()) + ", Armor: " + std::to_string(stats->GetArmor()));
+		LOG_INFO(std::to_string(stats->GetHealth()));
+		LOG_INFO(std::to_string(stats->GetArmor()));
+	}
+
+	void Enemy::SetupEventHandlers()
+	{
 		Engine::EventSystem::GetInstance().Subscribe("DamageEvent",
 			[this](const Engine::EventsTemp& event) {
 				const auto& damageEvent = static_cast<const Engine::DamageEvent&>(event);
@@ -50,11 +85,7 @@ namespace RogaliqueGame
 					if (soundManager)
 					{
 						LOG_INFO("Enemy taking damage, playing hit sound");
-						soundManager->PlaySound("Kill");
-					}
-					else
-					{
-						LOG_WARN("Enemy sound manager not found");
+						soundManager->PlaySound("kill");
 					}
 
 					auto stats = gameObject->GetComponent<UnitStatsComponent>();
@@ -70,7 +101,6 @@ namespace RogaliqueGame
 							effect->AddHitEffect(0.2f);
 						}
 
-						// Смерть
 						if (stats->GetHealth() <= 0)
 						{
 							LOG_INFO("Enemy died!");
@@ -81,16 +111,8 @@ namespace RogaliqueGame
 			});
 	}
 
-	Enemy::~Enemy()
-	{
-	}
-
 	void Enemy::Update(float deltaTime)
 	{
-		if (currentCooldown > 0)
-		{
-			currentCooldown -= deltaTime;
-		}
 		FindAndChasePlayer();
 	}
 
@@ -98,106 +120,55 @@ namespace RogaliqueGame
 	{
 		auto transform = gameObject->GetComponent<Engine::TransformComponent>();
 		if (!transform)
-		{
-			/*LOG_ERROR("Enemy transform component is null!");*/
 			return;
-		}
 
 		auto objectsInRange = Engine::GameWorld::Instance()->FindObjectsInRadius(
 			transform->GetWorldPosition(),
 			detectionRange);
 
 		Engine::GameObject* player = nullptr;
-		/*if (player)
-		{
-			std::cout << "Found object with tag: " << player->GetTag() << std::endl;
-		}
-		else
-		{
-			std::cout << "No objects found in range" << std::endl;
-		}*/
-
 		for (auto obj : objectsInRange)
 		{
 			if (obj->GetTag() == "Player")
 			{
 				player = obj;
-				// LOG_DEBUG("Player found in detection range");
 				break;
 			}
 		}
 
-		if (player)
-		{
-			auto playerTransform = player->GetComponent<Engine::TransformComponent>();
-			if (!playerTransform)
-			{
-				LOG_WARN("Player transform component not found");
-				return;
-			}
-
-			Engine::Vector2Df myPos = transform->GetWorldPosition();
-			Engine::Vector2Df playerPos = playerTransform->GetWorldPosition();
-			Engine::Vector2Df direction = { playerPos.x - myPos.x, playerPos.y - myPos.y };
-
-			float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-			auto rigidbody = gameObject->GetComponent<Engine::RigidbodyComponent>();
-			if (!rigidbody)
-			{
-				LOG_ERROR("Enemy rigidbody component not found");
-				return;
-			}
-
-			if (distance <= attackRange)
-			{
-				rigidbody->SetLinearVelocity(Engine::Vector2Df{ 0, 0 });
-				AttackPlayer(player);
-			}
-			else if (distance > 0)
-			{
-				direction.x /= distance;
-				direction.y /= distance;
-
-				Engine::Vector2Df velocity = { direction.x * moveSpeed, direction.y * moveSpeed };
-				rigidbody->SetLinearVelocity(velocity);
-			}
-		}
-		else
+		if (!player)
 		{
 			auto rigidbody = gameObject->GetComponent<Engine::RigidbodyComponent>();
 			if (rigidbody)
-			{
 				rigidbody->SetLinearVelocity(Engine::Vector2Df{ 0, 0 });
-			}
+			return;
 		}
-	}
-	void Enemy::AttackPlayer(Engine::GameObject* player)
-	{
-		if (currentCooldown <= 0)
+
+		auto playerTransform = player->GetComponent<Engine::TransformComponent>();
+		if (!playerTransform)
+			return;
+
+		Engine::Vector2Df myPos = transform->GetWorldPosition();
+		Engine::Vector2Df playerPos = playerTransform->GetWorldPosition();
+		Engine::Vector2Df direction = { playerPos.x - myPos.x, playerPos.y - myPos.y };
+
+		float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		auto rigidbody = gameObject->GetComponent<Engine::RigidbodyComponent>();
+		if (!rigidbody)
+			return;
+
+		if (distance > 0)
 		{
-			auto damageable = player->GetComponent<Engine::DamageableComponent>();
-			if (damageable)
-			{
-
-				auto effect = gameObject->GetComponent<Engine::EffectComponent>();
-				if (effect)
-				{
-					effect->AddHitEffect(0.1f);
-				}
-
-				damageable->TakeDamage(attackDamage, gameObject);
-				currentCooldown = attackCooldown;
-				LOG_INFO("Enemy attacked player for " + std::to_string(attackDamage) + " damage");
-			}
-			else
-			{
-				LOG_WARN("Player damageable component not found");
-			}
+			direction.x /= distance;
+			direction.y /= distance;
+			rigidbody->SetLinearVelocity({ direction.x * moveSpeed, direction.y * moveSpeed });
 		}
-		else
+
+		auto attackSystem = gameObject->GetComponent<Engine::AttackSystem>();
+		if (attackSystem && distance <= attackRange)
 		{
-			// LOG_DEBUG("Attack on cooldown: " + std::to_string(currentCooldown));
+			rigidbody->SetLinearVelocity(Engine::Vector2Df{ 0, 0 });
+			attackSystem->PerformAttack("basic");
 		}
 	}
 } // namespace RogaliqueGame

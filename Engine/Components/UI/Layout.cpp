@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Layout.h"
+#include "Button.h"
+#include <Systems/Logger.h>
 
 namespace Engine
 {
@@ -111,21 +113,27 @@ namespace Engine
 
 	void HorizontalBox::CalculateLayout()
 	{
-		float currentY = padding.y;
-		const float availableWidth = GetSize().x - padding.x * 2;
+		float currentX = padding.x;
+		const float availableHeight = GetSize().y - padding.y * 2;
 
 		for (auto* child : GetChildren())
 		{
 			if (!child || child->GetVisibility() == EWidgetVisibility::Collapsed)
 				continue;
-			const auto desiredSize = child->CalculateDesiredSize();
-			const float childWidth = std::min(desiredSize.x, availableWidth);
-			const float childHeight = desiredSize.y;
 
-			child->SetPosition({ padding.x, currentY });
+			const auto desiredSize = child->CalculateDesiredSize();
+			const float childWidth = desiredSize.x;
+			const float childHeight = std::min(desiredSize.y, availableHeight);
+
+			child->SetRelativePosition({ currentX, padding.y });
 			child->SetSize({ childWidth, childHeight });
 
-			currentY += childHeight + spacing;
+			currentX += childWidth + spacing;
+		}
+
+		if (autoSize)
+		{
+			Widget::SetSize({ currentX - spacing + padding.x, GetSize().y });
 		}
 	}
 
@@ -185,6 +193,10 @@ namespace Engine
 
 	void VerticalBox::CalculateLayout()
 	{
+		if (isUpdatingTransform)
+			return;
+		isUpdatingTransform = true;
+
 		float currentY = padding.y;
 		const float availableWidth = GetSize().x - padding.x * 2;
 
@@ -192,15 +204,36 @@ namespace Engine
 		{
 			if (!child || child->GetVisibility() == EWidgetVisibility::Collapsed)
 				continue;
-			const auto desiredSize = child->CalculateDesiredSize();
-			const float childWidth = std::min(desiredSize.x, availableWidth);
-			const float childHeight = desiredSize.y;
 
-			child->SetPosition({ padding.x, currentY });
-			child->SetSize({ childWidth, childHeight });
+			// ѕолучаем желаемый размер или используем стандартный
+			Vector2Df desiredSize = child->CalculateDesiredSize();
+			float childWidth = desiredSize.x > 0 ? desiredSize.x : availableWidth;
+			float childHeight = desiredSize.y > 0 ? desiredSize.y : 60.f; // —тандартна€ высота
+
+			// ќграничиваем максимальной доступной шириной
+			childWidth = std::min(childWidth, availableWidth);
+
+			child->SetRelativePosition({ padding.x, currentY });
+
+			// ”станавливаем новый размер только если он отличаетс€
+			if (child->GetSize().x != childWidth || child->GetSize().y != childHeight)
+			{
+				child->SetSize({ childWidth, childHeight });
+			}
 
 			currentY += childHeight + spacing;
 		}
+
+		if (autoSize)
+		{
+			const float newHeight = currentY - spacing + padding.y;
+			if (GetSize().y != newHeight)
+			{
+				Widget::SetSize({ GetSize().x, newHeight });
+			}
+		}
+
+		isUpdatingTransform = false;
 	}
 
 } // namespace Engine

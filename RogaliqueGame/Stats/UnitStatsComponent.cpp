@@ -1,6 +1,5 @@
 #include "UnitStatsComponent.h"
 
-
 namespace RogaliqueGame
 {
 	UnitStatsComponent::UnitStatsComponent(Engine::GameObject* gameObject)
@@ -85,4 +84,4 @@ namespace RogaliqueGame
 		SetValue<bool>(KEY_ALIVE, value);
 	}
 
-}
+} // namespace RogaliqueGame

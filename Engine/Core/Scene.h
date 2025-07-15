@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Window/Event.hpp>
 
 namespace Engine
 {
@@ -9,6 +10,8 @@ namespace Engine
 		virtual void Restart() = 0;
 		virtual void Stop() = 0;
 		virtual void Update(float deltaTime) = 0;
+
+		virtual void HandleEvent(const sf::Event& event) {}
 	};
 }
 

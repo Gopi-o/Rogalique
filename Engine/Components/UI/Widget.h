@@ -32,13 +32,23 @@ namespace Engine
 		virtual void RemoveChild(Widget* child);
 		Widget* GetParent() const { return parent; }
 		const std::vector<Widget*>& GetChildren() const { return children; }
+		Vector2Df GetMousePosition(const sf::Event& event) const;
+
+		const Vector2Df& GetPosition() const { return position; }
+		const Vector2Df& GetSize() const { return size; }
+		bool GetIsHovered() const { return isHovered; }
+		bool GetIsPressed() const { return isPressed; }
+		Vector2Df GetAbsolutePosition() const;
+		Vector2Df GetRelativePosition() const;
+
+		void SetInteractive(bool interactive) { isInteractive = interactive; }
+		bool IsInteractive() const { return isInteractive; }
 
 		//=== Размеры и позиция ===//
 		virtual Vector2Df CalculateDesiredSize() const;
 		void SetPosition(const Vector2Df& newPosition);
+		void SetRelativePosition(const Vector2Df& relativePos);
 		virtual void SetSize(const Vector2Df& newSize);
-		const Vector2Df& GetPosition() const { return position; }
-		const Vector2Df& GetSize() const { return size; }
 
 		//=== Внешний вид ===//
 		void SetVisibility(EWidgetVisibility newVisibility);
@@ -53,9 +63,28 @@ namespace Engine
 
 	protected:
 		//=== Вспомогательные методы ===//
+		bool isUpdatingTransform = false;
 		virtual bool IsPointInside(const Vector2Df& point) const;
 		virtual void UpdateTransform();
 		void UpdateChildrenTransforms();
+
+		static void SetSpriteSize(sf::Sprite& sprite, float width, float height)
+		{
+			if (const sf::Texture* texture = sprite.getTexture())
+			{
+				sf::FloatRect bounds = sprite.getLocalBounds();
+				if (bounds.width > 0 && bounds.height > 0)
+				{
+					// Сохраняем origin перед изменением scale
+					sf::Vector2f oldOrigin = sprite.getOrigin();
+					sprite.setScale(
+						width / bounds.width,
+						height / bounds.height);
+					// Восстанавливаем origin
+					sprite.setOrigin(oldOrigin);
+				}
+			}
+		}
 
 		//=== Графические компоненты ===//
 		sf::Sprite sprite;
@@ -74,5 +103,6 @@ namespace Engine
 
 		bool isHovered = false;
 		bool isPressed = false;
+		bool isInteractive = true;
 	};
 }; // namespace Engine

@@ -158,6 +158,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\UI\Button.h" />
+    <ClInclude Include="Components\GamePlay\AttackSystems\AttackSystem.h" />
     <ClInclude Include="Components\UI\Canvas.h" />
     <ClInclude Include="Components\Physics\Actor\ActorComponent.h" />
     <ClInclude Include="Components\Render\Camera\CameraComponent.h" />
@@ -171,6 +173,7 @@
     <ClInclude Include="Components\Physics\Actor\A_test\LevelPointsComponent.h" />
     <ClInclude Include="Components\UI\Layout.h" />
     <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="Core\GameStateManager.h" />
     <ClInclude Include="Math\RandomHelper.h" />
     <ClInclude Include="Systems\FileMaster\FileMaster.h" />
     <ClInclude Include="Systems\Event\EventsTemp.h" />
@@ -208,6 +211,8 @@
     <ClInclude Include="Components\UI\TextBlock.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\UI\Button.cpp" />
+    <ClCompile Include="Components\GamePlay\AttackSystems\AttackSystem.cpp" />
     <ClCompile Include="Components\UI\Canvas.cpp" />
     <ClCompile Include="Components\Physics\Actor\ActorComponent.cpp" />
     <ClCompile Include="Components\Render\Camera\CameraComponent.cpp" />
@@ -221,6 +226,7 @@
     <ClCompile Include="Components\Physics\Actor\A_test\LevelPointsComponent.cpp" />
     <ClCompile Include="Components\UI\Layout.cpp" />
     <ClCompile Include="Components\UI\Image.cpp" />
+    <ClCompile Include="Core\GameStateManager.cpp" />
     <ClCompile Include="Math\RandomHelper.cpp" />
     <ClCompile Include="Systems\FileMaster\FileMaster.cpp" />
     <ClCompile Include="Systems\Event\EventsTemp.cpp" />

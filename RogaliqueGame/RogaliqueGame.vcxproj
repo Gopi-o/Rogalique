@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Combat\CombatSystem.cpp" />
     <ClCompile Include="Core\Levels\DeveloperLevel.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\UI\GameHUD.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="GameStatePauseMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
     <ClCompile Include="GameStateRecords.cpp" />
+    <ClCompile Include="Scenes\MainMenuScene.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -181,6 +183,7 @@
     <ClCompile Include="Stats\UnitStatsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Combat\CombatSystem.h" />
     <ClInclude Include="Core\Levels\DeveloperLevel.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Core\UI\GameHUD.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
+    <ClInclude Include="Scenes\MainMenuScene.h" />
     <ClInclude Include="Memento.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="randomizer.h" />

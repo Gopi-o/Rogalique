@@ -2,6 +2,7 @@
 #include "TextBlock.h"
 #include <Systems/Resource/ResourceSystem.h>
 #include <Systems/Render/RenderSystem.h>
+#include "Button.h"
 
 namespace Engine
 {
@@ -64,6 +65,7 @@ namespace Engine
 	void TextBlock::SetOutlineThickness(float thickness)
 	{
 		text.setOutlineThickness(thickness);
+		UpdateTextPosition();
 	}
 
 	void TextBlock::SetHorizontalAlignment(EHorizontalAlignment alignment)
@@ -80,16 +82,15 @@ namespace Engine
 
 	void TextBlock::UpdateTransform()
 	{
-		UpdateTextPosition();
 		Widget::UpdateTransform();
+		UpdateTextPosition();
 	}
 
 	void TextBlock::UpdateTextPosition()
 	{
-		const auto textBounds = text.getLocalBounds();
-
-		float xPos = GetPosition().x;
-		float yPos = GetPosition().y;
+		const auto textBounds = GetAdjustedTextBounds();
+		const Vector2Df absolutePos = GetAbsolutePosition();
+		Vector2Df textPos = absolutePos;
 
 		// Горизонтальное выравнивание
 		switch (horizontalAlign)
@@ -97,13 +98,15 @@ namespace Engine
 			case EHorizontalAlignment::Left:
 				text.setOrigin(0, text.getOrigin().y);
 				break;
+
 			case EHorizontalAlignment::Center:
 				text.setOrigin(textBounds.width / 2.0f, text.getOrigin().y);
-				xPos += GetSize().x / 2.0f;
+				textPos.x += GetSize().x / 2.0f;
 				break;
+
 			case EHorizontalAlignment::Right:
 				text.setOrigin(textBounds.width, text.getOrigin().y);
-				xPos += GetSize().x;
+				textPos.x += GetSize().x;
 				break;
 		}
 
@@ -113,17 +116,31 @@ namespace Engine
 			case EVerticalAlignment::Top:
 				text.setOrigin(text.getOrigin().x, 0);
 				break;
+
 			case EVerticalAlignment::Center:
 				text.setOrigin(text.getOrigin().x, textBounds.height / 2.0f);
-				yPos += GetSize().y / 2.0f;
+				textPos.y += GetSize().y / 2.0f;
 				break;
+
 			case EVerticalAlignment::Bottom:
 				text.setOrigin(text.getOrigin().x, textBounds.height);
-				yPos += GetSize().y;
+				textPos.y += GetSize().y;
 				break;
 		}
 
-		text.setPosition(xPos, yPos);
+		text.setPosition(textPos.x, textPos.y);
+	}
+
+	sf::FloatRect TextBlock::GetAdjustedTextBounds() const
+	{
+		auto bounds = text.getLocalBounds();
+		const float outline = text.getOutlineThickness();
+		return {
+			bounds.left - outline,
+			bounds.top - outline,
+			bounds.width + outline * 2,
+			bounds.height + outline * 2
+		};
 	}
 
 } // namespace Engine

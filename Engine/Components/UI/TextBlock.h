@@ -44,6 +44,7 @@ namespace Engine
 	protected:
 		void UpdateTransform() override;
 		void UpdateTextPosition();
+		sf::FloatRect GetAdjustedTextBounds() const;
 
 	private:
 		sf::Text text;

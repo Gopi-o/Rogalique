@@ -9,24 +9,32 @@
 namespace RogaliqueGame
 {
 	class Enemy
-	{
-	public:
-		Enemy();
-		~Enemy();
+    {
+    public:
+        Enemy();
+        ~Enemy();
 
-		void Update(float deltaTime);
-		Engine::GameObject* GetGameObject() const { return gameObject; }
+        void Update(float deltaTime);
+        Engine::GameObject* GetGameObject() const { return gameObject; }
 
-	private:
-		Engine::GameObject* gameObject;
-		float moveSpeed;
-		float detectionRange;
-		float attackRange;
-		float attackCooldown;
-		float currentCooldown;
-		float attackDamage;
+    private:
+        Engine::GameObject* gameObject;
+        // Life stats
+		float enemyHealth = 100.0f;
+		float enemyArmor = 5.0f;
 
-		void FindAndChasePlayer();
-		void AttackPlayer(Engine::GameObject* player);
-	};
+		// Attack stats
+		float moveSpeed = 0.35f;
+		float detectionRange = 300.0f;
+		float attackRange = 50.0f;
+		float attackCooldown = 2.6f;
+		float attackDamage = 20.0f;
+
+        void FindAndChasePlayer();
+        void SetupComponents();
+        void LoadResources();
+        void SetupAttackSystem();
+		void SetupEnemyStats();
+        void SetupEventHandlers();
+    };
 } // namespace RogaliqueGame

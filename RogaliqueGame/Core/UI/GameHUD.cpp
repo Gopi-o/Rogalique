@@ -2,10 +2,13 @@
 #include <Systems/Resource/ResourceSystem.h>
 #include <Systems/Render/RenderSystem.h>
 #include <Core/GameWorld/GameWorld.h>
+#include <Systems/Event/EventSystem.h>
+#include <Systems/Logger.h>
 
 namespace RogaliqueGame
 {
 	GameHUD::GameHUD()
+		: canvas(nullptr), mainContainer(nullptr), topPanel(nullptr), bottomPanel(nullptr), healthText(nullptr), healthIcon(nullptr), ammoText(nullptr), enemiesText(nullptr), levelText(nullptr)
 	{
 		Initialize();
 		this->canvas = canvas;
@@ -18,7 +21,6 @@ namespace RogaliqueGame
 		this->canvas = (hudObject->AddComponent<Engine::Canvas>());
 		canvas->SetScreenSpace(true);
 
-		Engine::ResourceSystem::Instance()->LoadFont("default_font", "Resources/Fonts/Roboto-Regular.ttf");
 
 		auto iconObject = Engine::GameWorld::Instance()->CreateGameObject();
 		iconObject->SetTag("health_icon");
@@ -65,7 +67,7 @@ namespace RogaliqueGame
 		auto bottomPanelObject = Engine::GameWorld::Instance()->CreateGameObject();
 		this->bottomPanel = (bottomPanelObject->AddComponent<Engine::HorizontalBox>());
 		bottomPanel->SetAutoSize(true);
-		bottomPanel->SetSpacing(10.f);
+		bottomPanel->SetSpacing(120.f);
 		bottomPanel->SetPadding({ 10.f, 40.f });
 
 		auto enemiesTextObject = Engine::GameWorld::Instance()->CreateGameObject();
@@ -104,6 +106,16 @@ namespace RogaliqueGame
 		levelTextObject->SetShouldRender(false);
 
 		canvas->AddToLayer(mainContainer, 100);
+
+		Engine::EventSystem::GetInstance().Subscribe("HealthChangedEvent",
+			[this](const Engine::EventsTemp& event) {
+				if (this) // Добавляем проверку
+				{
+					const auto& healthEvent = static_cast<const Engine::HealthChangedEvent&>(event);
+					this->SetHealth(static_cast<int>(healthEvent.currentHealth),
+						static_cast<int>(healthEvent.maxHealth));
+				}
+			});
 	}
 
 	void GameHUD::Update(float deltaTime)
@@ -132,6 +144,12 @@ namespace RogaliqueGame
 
 	void GameHUD::SetHealth(int current, int max)
 	{
+		if (!this || !healthText)
+		{
+			LOG_ERROR("GameHUD or healthText is invalid!");
+			return;
+		}
+
 		if (healthText)
 		{
 			healthText->SetText("Health: " + std::to_string(current) + "/" + std::to_string(max));

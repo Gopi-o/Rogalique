@@ -16,14 +16,28 @@ namespace RogaliqueGame
 		void Update(float deltaTime);
 		Engine::GameObject* GetGameObject();
 
-	private:
-		Engine::GameObject* gameObject;
-		float moveSpeed;
-		float attackRange;
-		float attackCooldown;
-		float currentCooldown;
-		float attackDamage;
+		float GetMaxHealth() const { return playerMaxHealth; }
 
-		void Attack();
+	private:
+		void InitializeComponents();
+		void SetupInputBind();
+		void SetupEvents();
+		void InitializeAttackSystems();
+		void SetupPlayerStats();
+		void LoadResources();
+		void HandleDamage(float damage);
+
+		Engine::GameObject* gameObject;
+
+		// Life stats
+		float playerHealth = 550.0f;
+		float playerMaxHealth = playerHealth;
+		float playerArmor = 20.0f;
+
+		// Attack stats
+		float moveSpeed = 2.0f;
+		float attackRange = 100.0f;
+		float attackCooldown = 2.6f;
+		float attackDamage = 20.0f;
 	};
 } // namespace RogaliqueGame

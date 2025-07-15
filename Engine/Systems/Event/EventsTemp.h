@@ -58,4 +58,16 @@ namespace Engine
 	private:
 		GameObject* levelStartObject;
 	};
+
+	class HealthChangedEvent : public EventsTemp
+	{
+	public:
+		HealthChangedEvent(float current, float max)
+			: currentHealth(current), maxHealth(max) {}
+
+		std::string GetType() const override { return "HealthChangedEvent"; }
+
+		float currentHealth;
+		float maxHealth;
+	};
 } // namespace Engine

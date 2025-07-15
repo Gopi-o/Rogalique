@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Widget.h"
 #include <ResourceSystem/Sprite.h>
+#include "Layout.h"
+#include <Systems/Logger.h>
 
 namespace Engine
 {
@@ -11,19 +13,22 @@ namespace Engine
 
 	Widget::~Widget()
 	{
-		for (auto* Child : children)
+		/*for (auto* Child : children)
 		{
 			delete Child;
-		}
+		}*/
+		children.clear();
 	}
 
 	void Widget::Update(float deltaTime)
 	{
 		for (auto* child : children)
 		{
-			if (child && child->IsVisible())
+			if (child == nullptr && child->IsVisible() && child->GetParent() == NULL)
 				child->Update(deltaTime);
 		}
+
+
 	}
 
 	void Widget::Render()
@@ -55,19 +60,40 @@ namespace Engine
 		if (!IsVisible())
 			return;
 
+		// Обрабатываем children в обратном порядке (от верхнего к нижнему в z-order)
+		bool eventHandled = false;
 		for (auto it = children.rbegin(); it != children.rend(); ++it)
 		{
 			if (*it)
 			{
 				(*it)->HandleEvent(event);
+				// Прекращаем только если дочерний виджет действительно обработал событие
+				if ((*it)->GetIsPressed())
+				{
+					eventHandled = true;
+					break;
+				}
 			}
 		}
 
+		if (eventHandled)
+		{
+			// Сбрасываем состояния, если событие обработано дочерним элементом
+			if (isHovered)
+			{
+				isHovered = false;
+				if (OnUnhovered)
+					OnUnhovered();
+			}
+			return;
+		}
+
+		// Обработка событий для текущего виджета
+		const Vector2Df mousePos = GetMousePosition(event);
+		const bool nowHovered = IsPointInside(mousePos);
+
 		if (event.type == sf::Event::MouseMoved)
 		{
-			const Vector2Df mousePos(event.mouseMove.x, event.mouseMove.y);
-			const bool nowHovered = IsPointInside(mousePos);
-
 			if (nowHovered && !isHovered)
 			{
 				isHovered = true;
@@ -81,17 +107,20 @@ namespace Engine
 					OnUnhovered();
 			}
 		}
-		else if (event.type == sf::Event::MouseButtonPressed && isHovered)
+		else if (event.type == sf::Event::MouseButtonPressed && nowHovered)
 		{
 			isPressed = true;
 			if (OnPressed)
 				OnPressed();
 		}
-		else if (event.type == sf::Event::MouseButtonReleased && isPressed)
+		else if (event.type == sf::Event::MouseButtonReleased)
 		{
-			isPressed = true;
-			if (OnReleased)
-				OnReleased();
+			if (isPressed)
+			{
+				isPressed = false;
+				if (nowHovered && OnReleased)
+					OnReleased();
+			}
 		}
 	}
 
@@ -115,36 +144,93 @@ namespace Engine
 		}
 	}
 
+	Vector2Df Widget::GetMousePosition(const sf::Event& event) const
+	{
+		if (event.type == sf::Event::MouseMoved)
+			return { static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y) };
+		else if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased)
+			return { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
+		return { 0.0f, 0.0f };
+	}
+
+	Vector2Df Widget::GetAbsolutePosition() const
+	{
+		Vector2Df result = position;
+		if (parent)
+		{
+			result = result + parent->GetAbsolutePosition();
+			// Добавляем padding родителя, если это Layout
+			if (auto layout = dynamic_cast<Layout*>(parent))
+			{
+				result = result + layout->GetPadding();
+			}
+		}
+		return result;
+	}
+
+	Vector2Df Widget::GetRelativePosition() const
+	{
+		return position;
+	}
+
 	Vector2Df Widget::CalculateDesiredSize() const
 	{
-		if (useSprite)
+		// 1. Если задан явный размер - используем его
+		if (size.x > 0 && size.y > 0)
+			return size;
+
+		// 2. Если используется спрайт - возвращаем его локальные границы (не глобальные!)
+		if (useSprite && sprite.getTexture())
 		{
-			auto bounds = sprite.getGlobalBounds();
+			const sf::FloatRect bounds = sprite.getLocalBounds();
 			return { bounds.width, bounds.height };
 		}
-		return size;
+
+		// 3. Возвращаем минимальный допустимый размер
+		return { 10.0f, 10.0f };
 	}
 
 	void Widget::SetPosition(const Vector2Df& newPosition)
 	{
 		if (position != newPosition)
 		{
+			// Вычисляем смещение для всех дочерних элементов
+			Vector2Df offset = newPosition - position;
+
+			// Обновляем позицию текущего виджета
 			position = newPosition;
-			UpdateTransform();
+
+			if (useSprite)
+			{
+				sprite.setPosition(position.x, position.y);
+			}
+
+			// Обновляем позиции всех дочерних элементов с учетом смещения
+			UpdateChildrenTransforms();
 		}
+	}
+
+	void Widget::SetRelativePosition(const Vector2Df& relativePos)
+	{
+		position = relativePos;
+		UpdateTransform();
 	}
 
 	void Widget::SetSize(const Vector2Df& newSize)
 	{
-		if (size != newSize)
+		if (size == newSize || isUpdatingTransform)
+			return;
+
+		isUpdatingTransform = true;
+		size = newSize;
+
+		if (useSprite)
 		{
-			size = newSize;
-			if (useSprite)
-			{
-				SetSpriteSize(sprite, size.x, size.y);
-			}
-			UpdateTransform();
+			SetSpriteSize(sprite, size.x, size.y);
 		}
+
+		UpdateChildrenTransforms();
+		isUpdatingTransform = false;
 	}
 
 	void Widget::SetVisibility(EWidgetVisibility newVisibility)
@@ -157,7 +243,12 @@ namespace Engine
 
 	bool Widget::IsVisible() const
 	{
-		return visibility == EWidgetVisibility::Visible && (parent == nullptr || parent->IsVisible());
+		if (this == nullptr)
+		{
+			LOG_ERROR("Invalid Widget pointer in IsVisible()");
+			return false;
+		}
+		return visibility == EWidgetVisibility::Visible;
 	}
 
 	bool Widget::IsPointInside(const Vector2Df& point) const
@@ -171,12 +262,20 @@ namespace Engine
 
 	void Widget::UpdateTransform()
 	{
+		if (isUpdatingTransform)
+			return; // Защита от рекурсии
+
+		isUpdatingTransform = true;
+
+		Vector2Df finalPosition = GetAbsolutePosition();
 		if (useSprite)
 		{
-			sprite.setPosition(sf::Vector2f(position.x, position.y));
+			sprite.setPosition(finalPosition.x, finalPosition.y);
 		}
 
 		UpdateChildrenTransforms();
+
+		isUpdatingTransform = false;
 	}
 
 	void Widget::UpdateChildrenTransforms()

@@ -4,6 +4,7 @@
 #include "Core/GameWorld/GameWorld.h"
 #include <Systems/Render/RenderSystem.h>
 #include <Systems/Physics/PhysicsSystem.h>
+#include <Core/GameStateManager.h>
 
 namespace Engine
 {
@@ -35,6 +36,11 @@ namespace Engine
 				{
 					RenderSystem::Instance()->GetMainWindow().close();
 				}
+				GameStateManager::Instance()->HandleEvent(event);
+				if (currentScene)
+				{
+					currentScene->HandleEvent(event);
+				}
 			}
 
 			if (!RenderSystem::Instance()->GetMainWindow().isOpen())
@@ -44,11 +50,13 @@ namespace Engine
 
 			RenderSystem::Instance()->GetMainWindow().clear();
 
-			if (currentScene)
+
+			/*if (currentScene)
 			{
 				currentScene->Update(deltaTime);
-			}
+			}*/
 
+			GameStateManager::Instance()->UpdateCurrentScene(deltaTime);
 			GameWorld::Instance()->Update(deltaTime);
 			PhysicsSystem::Instance()->Update();
 			GameWorld::Instance()->Render();

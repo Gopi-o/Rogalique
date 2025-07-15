@@ -37,8 +37,8 @@ namespace Engine
 	Vector2Df MazeGeneratorComponent::GetStartPointPos() const
 	{
 		Vector2Df pos;
-		pos.x = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().x - 35.f;
-		pos.y = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().y - 35.f;
+		pos.x = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().x - 75.f;
+		pos.y = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().y - 75.f;
 
 		return pos;
 	}
@@ -190,6 +190,8 @@ namespace Engine
 		LOG_INFO("Start point created at: (" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ")");
 
 		Vector2Df exitPos = FindFurthestPoint();
+		if (exitPos == startPos)
+			exitPos = FindFurthestPoint();
 		EndPoint = LevelEditor::Instance()->CreatePointMarker(exitPos, "ExitPoint");
 		EndPoint->GetComponent<TransformComponent>()->SetWorldPosition(exitPos);
 		EndPoint->GetComponent<SpriteColliderComponent>();
@@ -228,16 +230,16 @@ namespace Engine
 				Vector2Df cellPos(x * cellSize, y * cellSize);
 
 				if (mazeGrid[y][x].northWall)
-					CreateWall(cellPos + Vector2Df(0, -cellSize / 2), cellSize, wallThickness);
+					CreateWall(cellPos + Vector2Df(0, -cellSize / 2), cellSize + wallThickness, wallThickness);
 
 				if (mazeGrid[y][x].southWall)
-					CreateWall(cellPos + Vector2Df(0, cellSize / 2), cellSize, wallThickness);
+					CreateWall(cellPos + Vector2Df(0, cellSize / 2), cellSize + wallThickness, wallThickness);
 
 				if (mazeGrid[y][x].westWall)
-					CreateWall(cellPos + Vector2Df(-cellSize / 2, 0), wallThickness, cellSize);
+					CreateWall(cellPos + Vector2Df(-cellSize / 2, 0), wallThickness, cellSize + wallThickness);
 
 				if (mazeGrid[y][x].eastWall)
-					CreateWall(cellPos + Vector2Df(cellSize / 2, 0), wallThickness, cellSize);
+					CreateWall(cellPos + Vector2Df(cellSize / 2, 0), wallThickness, cellSize + wallThickness);
 			}
 		}
 	}
