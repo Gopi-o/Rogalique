@@ -283,6 +283,7 @@ namespace Engine
 	}
 	void TransformComponent::updateLocalTransform() const
 	{
+
 		if (!isUpdated)
 		{
 			localTransform = createTransform(localPosition, localRotation, localScale);

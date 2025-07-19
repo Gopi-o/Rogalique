@@ -47,5 +47,6 @@ namespace Engine
 		GameObject* m_endPoint = nullptr;
 		bool m_isStartPoint = false;
 		bool m_isEndPoint = false;
+		int activated = 0;
 	};
 } // namespace Engine

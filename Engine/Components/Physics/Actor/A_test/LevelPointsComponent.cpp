@@ -2,11 +2,12 @@
 #include "LevelPointsComponent.h"
 #include <Components/Physics/Collider/ColliderComponent.h>
 #include <Systems/Logger.h>
+#include <Core/GameStateManager.h>
 
 namespace Engine
 {
 	LevelPointsComponent::LevelPointsComponent(GameObject* gameObject)
-		: ActorComponent(gameObject)
+		: ActorComponent(gameObject), activated(0)
 	{
 		// По умолчанию активируем обработку входа в триггер
 		EnableInteraction(InteractionType::OnTriggerEnter, true);
@@ -83,11 +84,16 @@ namespace Engine
 		}
 		else if (m_isEndPoint)
 		{
-			bool completed = true; // Здесь можно добавить логику проверки
+			bool completed = false;
+			if (activated >= 1)
+			{
+				completed = true; // Здесь можно добавить логику проверки
+				EventSystem::GetInstance().Dispatch(LevelEndEvent(gameObject, completed));
+				// Engine::GameStateManager::Instance()->RestartCurrentScene();
+			}
+			activated += 1;
 
 			LOG_INFO("PLAYER ENTERED EXIT POINT at (" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")");
-
-			EventSystem::GetInstance().Dispatch(LevelEndEvent(gameObject, completed));
 		}
 	}
 	bool LevelPointsComponent::IsPlayerEnter(GameObject* obj) const
