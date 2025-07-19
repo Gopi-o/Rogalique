@@ -1,0 +1,28 @@
+name: Build Game Solution
+
+on:
+  push:
+    branches:
+      - main # Запускать при пуше в ветку main
+  pull_request:
+    branches:
+      - main # Запускать при создании Pull Request в ветку main
+
+jobs:
+  build:
+    runs-on: windows-latest # Используем Windows Runner
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+       # Step 2: Set up MSBuild and Visual Studio
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      # Step 3: Build the solution
+      - name: Build solution
+        run: |
+          msbuild Game.sln /p:Configuration=Release /p:Platform=x64
+          
