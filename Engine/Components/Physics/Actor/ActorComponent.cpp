@@ -26,13 +26,15 @@ namespace Engine
 
 	ActorComponent::~ActorComponent()
 	{
+		if (gameObject == nullptr)
+			return;
+
 		auto collider = gameObject->GetComponent<ColliderComponent>();
-		if (collider)
-		{
-			collider->UnsubscribeCollision(m_collisionHandler);
-			collider->UnsubscribeTriggerEnter(m_triggerEnterHandler);
-			collider->UnsubscribeTriggerExit(m_triggerExitHandler);
-		}
+		if (!collider->GetGameObject())
+			return;
+		collider->UnsubscribeCollision(m_collisionHandler);
+		collider->UnsubscribeTriggerEnter(m_triggerEnterHandler);
+		collider->UnsubscribeTriggerExit(m_triggerExitHandler);
 	}
 
 	void ActorComponent::Update(float deltaTime)

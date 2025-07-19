@@ -27,6 +27,7 @@ namespace Engine
 		};
 
 		LevelPointsComponent(GameObject* gameObject);
+		~LevelPointsComponent() override = default;
 
 		// Установка точек
 		void SetStartPoint(GameObject* startPoint);

@@ -27,6 +27,9 @@ namespace Engine
 		bool IsInCanvas() const { return isInCanvas; }
 		virtual void HandleEvent(const sf::Event& event);
 
+		bool IsValid() const { return isValid && (this != nullptr); }
+		void MarkInvalid() { isValid = false; }
+
 		//=== Иерархия ===//
 		virtual void AddChild(Widget* child);
 		virtual void RemoveChild(Widget* child);
@@ -56,10 +59,10 @@ namespace Engine
 		bool IsVisible() const;
 
 		//=== События ===//
-		std::function<void()> OnHovered;
-		std::function<void()> OnUnhovered;
-		std::function<void()> OnPressed;
-		std::function<void()> OnReleased;
+		std::function<void()> OnHovered = []() {};
+		std::function<void()> OnUnhovered = []() {};
+		std::function<void()> OnPressed = []() {};
+		std::function<void()> OnReleased = []() {};
 
 	protected:
 		//=== Вспомогательные методы ===//
@@ -101,6 +104,7 @@ namespace Engine
 		Vector2Df size;
 		Vector2Df scale = { 1.0f, 1.0f };
 
+		bool isValid = true;
 		bool isHovered = false;
 		bool isPressed = false;
 		bool isInteractive = true;

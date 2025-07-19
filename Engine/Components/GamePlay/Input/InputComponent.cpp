@@ -11,6 +11,8 @@ namespace Engine
 		VerticalAxis = 0.f;
 		horizontalAxis = 0.f;
 		isAttack = false;
+		PauseLastFrame = isPausePressed;
+		isPausePressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
@@ -52,5 +54,9 @@ namespace Engine
 	bool InputComponent::IsAttack() const
 	{
 		return isAttack;
+	}
+	bool InputComponent::IsPause() const
+	{
+		return isPausePressed && !PauseLastFrame;
 	}
 } // namespace Engine

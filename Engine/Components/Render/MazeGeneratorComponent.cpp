@@ -37,8 +37,8 @@ namespace Engine
 	Vector2Df MazeGeneratorComponent::GetStartPointPos() const
 	{
 		Vector2Df pos;
-		pos.x = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().x - 75.f;
-		pos.y = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().y - 75.f;
+		pos.x = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().x - 5.f;
+		pos.y = StartPoint->GetComponent<TransformComponent>()->GetWorldPosition().y - 5.f;
 
 		return pos;
 	}

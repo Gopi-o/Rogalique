@@ -19,11 +19,12 @@ namespace Engine
 
 	GameObject::~GameObject()
 	{
-		for (auto component : components)
+		for (auto it = components.rbegin(); it != components.rend(); ++it)
 		{
-			delete component;
+			delete *it;
 		}
-		components.clear();
+
+		// components.clear();
 		children.clear();
 	}
 

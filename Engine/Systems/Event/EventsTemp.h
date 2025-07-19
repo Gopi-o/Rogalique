@@ -70,4 +70,5 @@ namespace Engine
 		float currentHealth;
 		float maxHealth;
 	};
+
 } // namespace Engine

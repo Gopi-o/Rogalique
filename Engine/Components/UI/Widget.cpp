@@ -9,6 +9,10 @@ namespace Engine
 	Widget::Widget(GameObject* gameObject)
 		: Component(gameObject)
 	{
+		OnHovered = []() {};
+		OnUnhovered = []() {};
+		OnPressed = []() {};
+		OnReleased = []() {};
 	}
 
 	Widget::~Widget()
@@ -17,6 +21,12 @@ namespace Engine
 		{
 			delete Child;
 		}*/
+		MarkInvalid();
+		for (auto* child : children)
+		{
+			if (child)
+				child->parent = nullptr;
+		}
 		children.clear();
 	}
 
@@ -24,11 +34,9 @@ namespace Engine
 	{
 		for (auto* child : children)
 		{
-			if (child == nullptr && child->IsVisible() && child->GetParent() == NULL)
+			if (child == nullptr && child->IsVisible() && child->GetParent() == nullptr)
 				child->Update(deltaTime);
 		}
-
-
 	}
 
 	void Widget::Render()
@@ -57,85 +65,111 @@ namespace Engine
 
 	void Widget::HandleEvent(const sf::Event& event)
 	{
+
 		if (!IsVisible())
 			return;
 
-		// Обрабатываем children в обратном порядке (от верхнего к нижнему в z-order)
+		// Создаем временную копию для безопасной итерации
+		const auto tempChildren = children;
 		bool eventHandled = false;
-		for (auto it = children.rbegin(); it != children.rend(); ++it)
+
+		// Обратная итерация по временной копии
+		for (auto it = tempChildren.rbegin(); it != tempChildren.rend(); ++it)
 		{
-			if (*it)
+			Widget* child = *it;
+			if (child == nullptr || child->GetParent() != this)
+				continue;
+
+			child->HandleEvent(event);
+			if (child->GetIsPressed())
 			{
-				(*it)->HandleEvent(event);
-				// Прекращаем только если дочерний виджет действительно обработал событие
-				if ((*it)->GetIsPressed())
-				{
-					eventHandled = true;
-					break;
-				}
+				eventHandled = true;
+				break;
 			}
 		}
 
 		if (eventHandled)
 		{
-			// Сбрасываем состояния, если событие обработано дочерним элементом
 			if (isHovered)
 			{
 				isHovered = false;
-				if (OnUnhovered)
-					OnUnhovered();
+				try
+				{
+					if (OnUnhovered)
+					{
+						if (this->gameObject == nullptr)
+							OnUnhovered();
+					}
+				}
+				catch (...)
+				{
+				}
 			}
 			return;
 		}
 
 		// Обработка событий для текущего виджета
-		const Vector2Df mousePos = GetMousePosition(event);
-		const bool nowHovered = IsPointInside(mousePos);
+		try
+		{
+			if (this->GetParent() == nullptr)
+			{
+				return;
+			}
+			const Vector2Df mousePos = GetMousePosition(event);
+			const bool nowHovered = IsPointInside(mousePos);
 
-		if (event.type == sf::Event::MouseMoved)
-		{
-			if (nowHovered && !isHovered)
+			if (event.type == sf::Event::MouseMoved)
 			{
-				isHovered = true;
-				if (OnHovered)
-					OnHovered();
+				if (nowHovered && !isHovered)
+				{
+					isHovered = true;
+					if (OnHovered)
+						OnHovered();
+				}
+				else if (!nowHovered && isHovered)
+				{
+					isHovered = false;
+					if (OnUnhovered)
+						OnUnhovered();
+				}
 			}
-			else if (!nowHovered && isHovered)
+			else if (event.type == sf::Event::MouseButtonPressed && nowHovered)
 			{
-				isHovered = false;
-				if (OnUnhovered)
-					OnUnhovered();
+				isPressed = true;
+				if (OnPressed)
+					OnPressed();
+			}
+			else if (event.type == sf::Event::MouseButtonReleased)
+			{
+				if (isPressed)
+				{
+					isPressed = false;
+					if (nowHovered && OnReleased)
+						OnReleased();
+				}
 			}
 		}
-		else if (event.type == sf::Event::MouseButtonPressed && nowHovered)
+		catch (...)
 		{
-			isPressed = true;
-			if (OnPressed)
-				OnPressed();
-		}
-		else if (event.type == sf::Event::MouseButtonReleased)
-		{
-			if (isPressed)
-			{
-				isPressed = false;
-				if (nowHovered && OnReleased)
-					OnReleased();
-			}
+			// Логирование ошибки
 		}
 	}
 
 	void Widget::AddChild(Widget* child)
 	{
-		if (child && child != this)
-		{
-			children.push_back(child);
-			child->parent = this;
-			child->UpdateTransform();
-		}
+
+		if (child == nullptr || child == this || !child->IsValid())
+			return;
+		children.push_back(child);
+		child->parent = this;
+		child->UpdateTransform();
 	}
 
 	void Widget::RemoveChild(Widget* child)
 	{
+		if (child == nullptr)
+			return;
+
 		auto it = std::find(children.begin(), children.end(), child);
 		if (it != children.end())
 		{

@@ -13,7 +13,7 @@ namespace Engine
 		MazeGeneratorComponent(GameObject* gameObject);
 
 		// Генерация лабиринта с параметрами
-		void Generate(int width, int height, float cellSize = 256.0f, float wallThickness = 24.0f);
+		void Generate(int width, int height, float cellSize = 812.0f, float wallThickness = 48.0f);
 		void Clear();
 
 		void Update(float deltaTime) override {}

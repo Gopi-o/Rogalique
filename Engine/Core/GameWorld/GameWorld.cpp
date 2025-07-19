@@ -39,7 +39,6 @@ namespace Engine
 			}
 			DestroyGameObjectImmediative(markedToDestroyGameObject[i]);
 		}
-
 	}
 
 	GameObject* GameWorld::CreateGameObject()
@@ -142,9 +141,14 @@ namespace Engine
 
 	void GameWorld::DestroyGameObjectImmediative(GameObject* gameObject)
 	{
-		gameObjects.erase(std::remove_if(gameObjects.begin(), gameObjects.end(), [gameObject](GameObject* obj) { return obj == gameObject; }), gameObjects.end());
-		markedToDestroyGameObject.erase(std::remove_if(markedToDestroyGameObject.begin(), markedToDestroyGameObject.end(), [gameObject](GameObject* obj) { return obj == gameObject; }), markedToDestroyGameObject.end());
+		if (!gameObject)
+			return;
 
+		// Удаляем из списков перед удалением
+		gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), gameObject), gameObjects.end());
+		markedToDestroyGameObject.erase(std::remove(markedToDestroyGameObject.begin(), markedToDestroyGameObject.end(), gameObject), markedToDestroyGameObject.end());
+
+		// Удаляем сам объект
 		delete gameObject;
 	}
 } // namespace Engine

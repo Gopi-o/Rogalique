@@ -56,6 +56,12 @@ namespace Engine
 
 		for (auto it = layeredWidgets.rbegin(); it != layeredWidgets.rend(); ++it)
 		{
+			if (!it->widget || !it->widget->IsValid())
+			{
+				it = decltype(it)(layeredWidgets.erase(std::next(it).base()));
+				continue;
+			}
+
 			if (it->widget && it->widget->IsVisible())
 			{
 				it->widget->HandleEvent(event);
