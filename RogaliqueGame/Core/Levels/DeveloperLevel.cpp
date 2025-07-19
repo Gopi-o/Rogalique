@@ -12,10 +12,7 @@ namespace RogaliqueGame
 
 	void DeveloperLevel::Start()
 	{
-		
-
-
-
+		bIsPaused = false;
 		CreateLevel();
 
 		player = std::make_shared<Player>();
@@ -57,7 +54,7 @@ namespace RogaliqueGame
 				static_cast<int>(player->GetMaxHealth()));
 		}
 		hud->SetAmmo(30, 120);
-		hud->SetEnemiesCount(static_cast<int>(enemies.size()));
+		UpdateEnemiesCount();
 		hud->SetLevelInfo("developer");
 		// CreateEnemy();
 	}
@@ -68,25 +65,70 @@ namespace RogaliqueGame
 	}
 	void DeveloperLevel::Stop()
 	{
+		player->UnsubscribeAllEvents();
+		for (auto& enemy : enemies)
+		{
+			if (enemy)
+			{
+				enemy->UnsubscribeAllEvents();
+			}
+		}
+		hud.reset();
+		enemies.clear();
 		GameWorld::Instance()->Clear();
+		player.reset();
 	}
 
 	void DeveloperLevel::Update(float deltaTime)
 	{
-		if (player)
-		{
-			player->Update(deltaTime);
-		}
-
 		if (hud)
 		{
 			hud->Update(deltaTime);
 		}
 
-		for (auto& enemy : enemies)
+		if (auto input = player->GetGameObject()->GetComponent<InputComponent>())
 		{
-			enemy->Update(deltaTime);
+			if (input->IsPause())
+			{
+				// Переключаем состояние паузы
+				if (hud)
+					hud->SetPaused(!hud->IsPaused());
+				bIsPaused = !bIsPaused;
+			}
 		}
+
+		if (!bIsPaused)
+		{
+			if (player)
+			{
+				player->Update(deltaTime);
+			}
+
+			UpdateEnemiesCount();
+
+			for (auto& enemy : enemies)
+			{
+				enemy->Update(deltaTime);
+			}
+		}
+	}
+
+	void DeveloperLevel::HandleEvent(const sf::Event& event)
+	{
+		if (hud)
+		{
+			hud->HandleEvent(event);
+		}
+	}
+
+	void DeveloperLevel::Pause()
+	{
+		bIsPaused = true;
+	}
+
+	void DeveloperLevel::UnPause()
+	{
+		bIsPaused = false;
 	}
 
 	void DeveloperLevel::CreateLevel()
@@ -113,6 +155,22 @@ namespace RogaliqueGame
 
 		player = std::make_shared<Player>();
 		CreateEnemy();
+	}
+
+	void DeveloperLevel::UpdateEnemiesCount()
+	{
+		if (!hud)
+			return;
+
+		// Удаляем уничтоженных врагов из списка
+		enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
+						  [](const std::shared_ptr<Enemy>& enemy) {
+							  return !enemy || !enemy->IsAlive();
+						  }),
+			enemies.end());
+
+		// Обновляем счетчик в HUD
+		hud->SetEnemiesCount(static_cast<int>(enemies.size()));
 	}
 
 	void DeveloperLevel::CreateEnemy()

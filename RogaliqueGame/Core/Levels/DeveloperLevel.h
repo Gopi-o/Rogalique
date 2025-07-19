@@ -18,6 +18,10 @@ namespace RogaliqueGame
 		void Restart() override;
 		void Stop() override;
 		void Update(float deltaTime) override;
+		void HandleEvent(const sf::Event& event) override;
+
+		void Pause();
+		void UnPause();
 
 		void CreateEnemy();
 		void CreateLevel();
@@ -28,5 +32,8 @@ namespace RogaliqueGame
 		std::shared_ptr<Player> player;
 		std::vector<std::shared_ptr<Enemy>> enemies;
 		std::shared_ptr<GameHUD> hud;
+		bool bIsPaused;
+
+		void UpdateEnemiesCount();
 	};
 } // namespace RogaliqueGame

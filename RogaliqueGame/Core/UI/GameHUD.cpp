@@ -4,14 +4,35 @@
 #include <Core/GameWorld/GameWorld.h>
 #include <Systems/Event/EventSystem.h>
 #include <Systems/Logger.h>
+#include <Core/GameStateManager.h>
 
 namespace RogaliqueGame
 {
 	GameHUD::GameHUD()
 		: canvas(nullptr), mainContainer(nullptr), topPanel(nullptr), bottomPanel(nullptr), healthText(nullptr), healthIcon(nullptr), ammoText(nullptr), enemiesText(nullptr), levelText(nullptr)
 	{
+		healthCallback = [this](const Engine::EventsTemp& event) {
+			if (!this || !healthText)
+				return;
+
+			const auto& healthEvent = static_cast<const Engine::HealthChangedEvent&>(event);
+			this->SetHealth(static_cast<int>(healthEvent.currentHealth),
+				static_cast<int>(healthEvent.maxHealth));
+		};
 		Initialize();
 		this->canvas = canvas;
+		CreatePauseMenu();
+	}
+
+	GameHUD::~GameHUD()
+	{
+		isAlive = false;
+
+		Engine::EventSystem::GetInstance().Unsubscribe("HealthChangedEvent", healthCallback);
+		if (canvas)
+		{
+			canvas->MarkInvalid();
+		}
 	}
 
 	void GameHUD::Initialize()
@@ -20,7 +41,6 @@ namespace RogaliqueGame
 		hudObject->SetTag("HUD");
 		this->canvas = (hudObject->AddComponent<Engine::Canvas>());
 		canvas->SetScreenSpace(true);
-
 
 		auto iconObject = Engine::GameWorld::Instance()->CreateGameObject();
 		iconObject->SetTag("health_icon");
@@ -107,15 +127,7 @@ namespace RogaliqueGame
 
 		canvas->AddToLayer(mainContainer, 100);
 
-		Engine::EventSystem::GetInstance().Subscribe("HealthChangedEvent",
-			[this](const Engine::EventsTemp& event) {
-				if (this) // Добавляем проверку
-				{
-					const auto& healthEvent = static_cast<const Engine::HealthChangedEvent&>(event);
-					this->SetHealth(static_cast<int>(healthEvent.currentHealth),
-						static_cast<int>(healthEvent.maxHealth));
-				}
-			});
+		Engine::EventSystem::GetInstance().Subscribe("HealthChangedEvent", healthCallback);
 	}
 
 	void GameHUD::Update(float deltaTime)
@@ -136,10 +148,9 @@ namespace RogaliqueGame
 
 	void GameHUD::HandleEvent(const sf::Event& event)
 	{
-		if (canvas)
-		{
-			canvas->HandleEvent(event);
-		}
+		if (!this)
+			return;
+		canvas->HandleEvent(event);
 	}
 
 	void GameHUD::SetHealth(int current, int max)
@@ -178,6 +189,77 @@ namespace RogaliqueGame
 		{
 			levelText->SetText("Level: " + info);
 		}
+	}
+
+	void GameHUD::CreatePauseMenu()
+	{
+		auto windowSize = Engine::RenderSystem::Instance()->GetMainWindow().getSize();
+
+		// Фон меню паузы
+		auto bgObject = Engine::GameWorld::Instance()->CreateGameObject();
+		pauseBackground = bgObject->AddComponent<Engine::Image>();
+		pauseBackground->SetTexture("floor");
+		pauseBackground->SetSize({ static_cast<float>(windowSize.x), static_cast<float>(windowSize.y) });
+		pauseBackground->SetColor(sf::Color(0, 0, 0, 180)); // Полупрозрачный черный
+		canvas->AddToLayer(pauseBackground, 150);
+
+		// Контейнер для кнопок меню паузы
+		auto containerObject = Engine::GameWorld::Instance()->CreateGameObject();
+		auto pauseContainer = containerObject->AddComponent<Engine::VerticalBox>();
+		pauseContainer->SetSize({ 300.f, 200.f });
+		pauseContainer->SetPosition({ static_cast<float>(windowSize.x) / 2 - 150.f,
+			static_cast<float>(windowSize.y) / 2 - 100.f });
+		pauseContainer->SetSpacing(20.f);
+		pauseContainer->SetPadding({ 20.f, 20.f });
+		canvas->AddToLayer(pauseContainer, 151);
+
+		// Кнопка "Resume"
+		auto resumeObject = Engine::GameWorld::Instance()->CreateGameObject();
+		resumeButton = resumeObject->AddComponent<Engine::Button>();
+		resumeButton->SetText("Resume (Esc)");
+		resumeButton->SetTextFont("default_font");
+		resumeButton->SetTextSize(24);
+		resumeButton->SetNormalTexture("button_normal_menu");
+		resumeButton->SetHoveredTexture("button_hovered");
+		resumeButton->SetPressedTexture("button_pressed");
+		resumeButton->SetSize({ 200.f, 50.f });
+		resumeButton->OnClick = [this]() { SetPaused(false); };
+		pauseContainer->AddChild(resumeButton);
+
+		// Кнопка "Exit to Menu"
+		auto exitObject = Engine::GameWorld::Instance()->CreateGameObject();
+		exitToMenuButton = exitObject->AddComponent<Engine::Button>();
+		exitToMenuButton->SetText("Exit to Menu");
+		exitToMenuButton->SetTextFont("default_font");
+		exitToMenuButton->SetTextSize(24);
+		exitToMenuButton->SetNormalTexture("button_normal_menu");
+		exitToMenuButton->SetHoveredTexture("button_hovered");
+		exitToMenuButton->SetPressedTexture("button_pressed");
+		exitToMenuButton->SetSize({ 200.f, 50.f });
+		exitToMenuButton->OnClick = []() {
+			Engine::GameStateManager::Instance()->SwitchToScene("MainMenu");
+		};
+		pauseContainer->AddChild(exitToMenuButton);
+
+		bgObject->SetShouldRender(false);
+		containerObject->SetShouldRender(false);
+		resumeObject->SetShouldRender(false);
+		exitObject->SetShouldRender(false);
+
+		// Изначально скрываем меню
+		SetPaused(false);
+	}
+
+	void GameHUD::SetPaused(bool paused)
+	{
+		isPaused = paused;
+
+		if (pauseBackground)
+			pauseBackground->SetVisibility(paused ? Engine::EWidgetVisibility::Visible : Engine::EWidgetVisibility::Hidden);
+		if (resumeButton)
+			resumeButton->SetVisibility(paused ? Engine::EWidgetVisibility::Visible : Engine::EWidgetVisibility::Hidden);
+		if (exitToMenuButton)
+			exitToMenuButton->SetVisibility(paused ? Engine::EWidgetVisibility::Visible : Engine::EWidgetVisibility::Hidden);
 	}
 
 } // namespace RogaliqueGame

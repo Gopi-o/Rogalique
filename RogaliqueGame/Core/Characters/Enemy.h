@@ -9,17 +9,21 @@
 namespace RogaliqueGame
 {
 	class Enemy
-    {
-    public:
-        Enemy();
-        ~Enemy();
+	{
+	public:
+		Enemy();
+		~Enemy();
 
-        void Update(float deltaTime);
-        Engine::GameObject* GetGameObject() const { return gameObject; }
+		void Update(float deltaTime);
+		Engine::GameObject* GetGameObject() const { return gameObject; }
+		bool IsAlive() const { return isAlive && gameObject; }
+		void UnsubscribeAllEvents();
 
-    private:
-        Engine::GameObject* gameObject;
-        // Life stats
+	private:
+		Engine::GameObject* gameObject;
+		std::vector<std::string> subscribedEvents;
+		bool isAlive = true;
+		// Life stats
 		float enemyHealth = 100.0f;
 		float enemyArmor = 5.0f;
 
@@ -30,11 +34,11 @@ namespace RogaliqueGame
 		float attackCooldown = 2.6f;
 		float attackDamage = 20.0f;
 
-        void FindAndChasePlayer();
-        void SetupComponents();
-        void LoadResources();
-        void SetupAttackSystem();
+		void FindAndChasePlayer();
+		void SetupComponents();
+		void LoadResources();
+		void SetupAttackSystem();
 		void SetupEnemyStats();
-        void SetupEventHandlers();
-    };
+		void SetupEventHandlers();
+	};
 } // namespace RogaliqueGame

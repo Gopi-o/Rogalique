@@ -8,6 +8,7 @@
 #include <Components/GamePlay/Effect/EffectComponent.h>
 #include <Components/Physics/Actor/A_test/LevelPointsComponent.h>
 #include <Components/GamePlay/AttackSystems/AttackSystem.h>
+#include <Core/GameStateManager.h>
 
 namespace RogaliqueGame
 {
@@ -67,7 +68,17 @@ namespace RogaliqueGame
 		return gameObject;
 	}
 
-
+	void Player::UnsubscribeAllEvents()
+	{
+		auto& eventSystem = Engine::EventSystem::GetInstance();
+		Engine::EventSystem::EventCallback emptyCallback;
+		// Отписываемся от всех событий, на которые подписывались
+		for (const auto& eventName : subscribedEvents)
+		{
+			eventSystem.Unsubscribe(eventName, emptyCallback);
+		}
+		subscribedEvents.clear();
+	}
 
 	// Метода инициализации
 	void Player::InitializeComponents()
@@ -84,7 +95,6 @@ namespace RogaliqueGame
 		auto damageable = gameObject->AddComponent<Engine::DamageableComponent>();
 		auto effectComponent = gameObject->AddComponent<Engine::EffectComponent>();
 
-
 		playerRenderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("ball"));
 		playerRenderer->SetPixelSize(32, 32);
 		playerCamera->SetBaseResolution(1280, 720);
@@ -95,12 +105,12 @@ namespace RogaliqueGame
 	}
 	void Player::SetupInputBind()
 	{
-
 	}
 	void Player::SetupEvents()
 	{
 		auto& eventSystem = Engine::EventSystem::GetInstance();
 
+		subscribedEvents.push_back("LevelStartEvent");
 		eventSystem.Subscribe("LevelStartEvent",
 			[this](const Engine::EventsTemp& event) {
 				LOG_INFO("LevelStartEvent received!");
@@ -108,12 +118,14 @@ namespace RogaliqueGame
 				LOG_INFO("Player detected level start point");
 			});
 
-		Engine::EventSystem::GetInstance().Subscribe("LevelEndEvent",
+		subscribedEvents.push_back("LevelEndEvent");
+		eventSystem.Subscribe("LevelEndEvent",
 			[this](const Engine::EventsTemp& event) {
 				const auto& endEvent = static_cast<const Engine::LevelPointsComponent::LevelEndEvent&>(event);
 				if (endEvent.levelCompleted)
 				{
 					LOG_INFO("Player completed the level!");
+					Engine::GameStateManager::Instance()->RestartCurrentScene();
 				}
 				else
 				{
@@ -121,7 +133,8 @@ namespace RogaliqueGame
 				}
 			});
 
-		Engine::EventSystem::GetInstance().Subscribe("DamageEvent",
+		subscribedEvents.push_back("DamageEvent");
+		eventSystem.Subscribe("DamageEvent",
 			[this](const Engine::EventsTemp& event) {
 				const auto& damageEvent = static_cast<const Engine::DamageEvent&>(event);
 				if (damageEvent.GetTarget() != this->gameObject)

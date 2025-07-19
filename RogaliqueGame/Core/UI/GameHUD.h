@@ -3,6 +3,8 @@
 #include <Components/UI/TextBlock.h>
 #include <Components/UI/Image.h>
 #include <Components/UI/Layout.h>
+#include <Components/UI/Button.h>
+#include <Systems/Event/EventSystem.h>
 
 namespace RogaliqueGame
 {
@@ -10,7 +12,7 @@ namespace RogaliqueGame
 	{
 	public:
 		GameHUD();
-		~GameHUD() = default;
+		~GameHUD();
 
 		void Initialize();
 		void Update(float deltaTime);
@@ -21,6 +23,10 @@ namespace RogaliqueGame
 		void SetAmmo(int current, int max);
 		void SetEnemiesCount(int count);
 		void SetLevelInfo(const std::string& info);
+
+		void CreatePauseMenu();
+		void SetPaused(bool paused);
+		bool IsPaused() const { return isPaused; }
 
 	private:
 		Engine::Canvas* canvas = nullptr;
@@ -33,5 +39,14 @@ namespace RogaliqueGame
 		Engine::TextBlock* ammoText = nullptr;
 		Engine::TextBlock* enemiesText = nullptr;
 		Engine::TextBlock* levelText = nullptr;
+
+		Engine::Image* pauseBackground = nullptr;
+		Engine::TextBlock* pauseTitle = nullptr;
+		Engine::Button* resumeButton = nullptr;
+		Engine::Button* exitToMenuButton = nullptr;
+		bool isPaused = false;
+		bool isAlive = true;
+
+		std::function<void(const Engine::EventsTemp&)> healthCallback;
 	};
 } // namespace RogaliqueGame

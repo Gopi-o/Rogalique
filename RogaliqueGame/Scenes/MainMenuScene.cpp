@@ -17,14 +17,13 @@ namespace RogaliqueGame
 	{
 		LOG_INFO("MainMenuScene is started;");
 
-		 // Create canvas for the menu
+		// Create canvas for the menu
 		auto menuObject = GameWorld::Instance()->CreateGameObject();
 		menuObject->SetTag("MainMenu");
 		canvas = menuObject->AddComponent<Canvas>();
 		canvas->SetScreenSpace(true);
 
 		// Load resources
-
 
 		// Create background
 		auto bgObject = GameWorld::Instance()->CreateGameObject();
@@ -69,7 +68,6 @@ namespace RogaliqueGame
 		bgObject->SetShouldRender(false);
 		containerObject->SetShouldRender(false);
 		titleObject->SetShouldRender(false);
-		
 
 		// Add containers to canvas
 		canvas->AddToLayer(background, 0);
@@ -104,7 +102,7 @@ namespace RogaliqueGame
 
 	void MainMenuScene::Update(float deltaTime)
 	{
-		//LOG_INFO("MainMenuScene is Update;");
+		// LOG_INFO("MainMenuScene is Update;");
 		if (canvas)
 		{
 			canvas->Update(deltaTime);
@@ -131,14 +129,12 @@ namespace RogaliqueGame
 		button->SetHoveredTexture("button_hovered");
 		button->SetPressedTexture("button_pressed");
 
-
-
 		button->SetText(text);
 		button->SetTextFont("menu_font");
 		button->SetTextSize(24);
 		button->SetTextColor(sf::Color::White);
 		button->SetTextOutlineColor(sf::Color::Black);
-		button->SetTextOutlineThicness(1.f); 
+		button->SetTextOutlineThicness(1.f);
 
 		button->SetSize({ 200.f, 60.f });
 		button->SetInteractive(true);
@@ -151,7 +147,7 @@ namespace RogaliqueGame
 
 		mainContainer->AddChild(button);
 		menuButtons.push_back(button);
-	
+
 		buttonObject->SetShouldRender(false);
 	}
 
@@ -178,6 +174,7 @@ namespace RogaliqueGame
 
 	void MainMenuScene::OnExitClicked()
 	{
+		Engine::RenderSystem::Instance()->GetMainWindow().close();
 		LOG_INFO("Exit button clicked");
 	}
-}
+} // namespace RogaliqueGame

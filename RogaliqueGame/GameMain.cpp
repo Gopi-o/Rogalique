@@ -28,7 +28,7 @@ int main()
 
 	Engine::RenderSystem::Instance()->SetMainWindow(new sf::RenderWindow(sf::VideoMode(1280, 720), "My Game Roguelike"));
 
-	ResourceSystem::Instance()->LoadTexture("wall", "Resources/Textures/wall.jpg");
+	ResourceSystem::Instance()->LoadTexture("wall", "Resources/Textures/wall1.jpg");
 	ResourceSystem::Instance()->LoadTexture("floor", "Resources/Textures/floor.png");
 	ResourceSystem::Instance()->LoadTexture("start", "Resources/Textures/start.png");
 	ResourceSystem::Instance()->LoadTexture("exit", "Resources/Textures/exit.png");
@@ -50,10 +50,10 @@ int main()
 	// Переключение на главное меню
 	stateManager.SwitchToScene("MainMenu");
 
-	//auto developerLevel = std::make_shared<DeveloperLevel>();
-	//developerLevel->Start();
+	// auto developerLevel = std::make_shared<DeveloperLevel>();
+	// developerLevel->Start();
 
-	//Engine::GameEngine::Instance()->SetCurrentScene(developerLevel.get());
+	// Engine::GameEngine::Instance()->SetCurrentScene(developerLevel.get());
 
 	Engine::GameEngine::Instance()->Run();
 

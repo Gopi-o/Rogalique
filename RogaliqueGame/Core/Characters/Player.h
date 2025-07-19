@@ -17,6 +17,7 @@ namespace RogaliqueGame
 		Engine::GameObject* GetGameObject();
 
 		float GetMaxHealth() const { return playerMaxHealth; }
+		void UnsubscribeAllEvents();
 
 	private:
 		void InitializeComponents();
@@ -28,9 +29,10 @@ namespace RogaliqueGame
 		void HandleDamage(float damage);
 
 		Engine::GameObject* gameObject;
+		std::vector<std::string> subscribedEvents;
 
 		// Life stats
-		float playerHealth = 550.0f;
+		float playerHealth = 50.0f;
 		float playerMaxHealth = playerHealth;
 		float playerArmor = 20.0f;
 
