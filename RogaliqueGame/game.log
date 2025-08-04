@@ -60075,3 +60075,1083 @@ DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
 DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
 DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
 INFO Exit button clicked
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (812.000000, 0.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2303645249920 and 2303645248624
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2303645244304 and 2303645248624
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (812.000000, 0.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (1624.000000, 2436.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 1817309855344 and 1817309853040
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 1817309858656 and 1817309853040
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (1624.000000, 2436.000000)
+INFO PlaySound called for: hit
+ERROR Sound not found in map: hit
+INFO Available sounds: kill, 
+INFO PlaySound called for: hit
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO Player took 20.000000 damage. Health: 30.000000
+DEBUG TriggerEnter detected between: 1817309858656 and 1817309853040
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO Player completed the level!
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (812.000000, 812.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+INFO PLAYER ENTERED EXIT POINT at (1624.000000, 2436.000000)
+DEBUG TriggerEnter detected between: 1817306263344 and 1817306263776
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (3248.000000, 3248.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2511830394656 and 2511830396096
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2511830394224 and 2511830396096
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (3248.000000, 3248.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (812.000000, 0.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2177961765184 and 2177961758560
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2177961762592 and 2177961758560
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (812.000000, 0.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (812.000000, 3248.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2002033626800 and 2002033629536
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2002033629392 and 2002033629536
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (812.000000, 3248.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (812.000000, 812.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 3050961898000 and 3050961898288
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 3050961899728 and 3050961898288
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (812.000000, 812.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (3248.000000, 3248.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2681102550576 and 2681102551584
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2681102556336 and 2681102551584
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (3248.000000, 3248.000000)
+INFO PlaySound called for: hit
+ERROR Sound not found in map: hit
+INFO Available sounds: kill, 
+INFO PlaySound called for: hit
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO Player took 20.000000 damage. Health: 30.000000
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (1624.000000, 1624.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2480599543600 and 2480599544752
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2480599542880 and 2480599544752
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (1624.000000, 1624.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (3248.000000, 812.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 1447656415328 and 1447656414032
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 1447656412592 and 1447656414032
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (3248.000000, 812.000000)
+INFO Started
+INFO Font 'default_font' loaded successfully from: Resources/Fonts/Roboto-Regular.ttf
+INFO Font 'menu_font' loaded successfully from: Resources/Fonts/Roboto-Light.ttf
+INFO MainMenuScene is started;
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 441.000000,170.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,190.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,270.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,350.000000 Size: 200.000000x60.000000
+DEBUG Button transform - Pos: 442.000000,430.000000 Size: 200.000000x60.000000
+INFO New Game button clicked
+INFO MainMenuScene is Stop;
+INFO Level point created: StartPoint
+INFO Start point created at: (0.000000, 0.000000)
+INFO Level point created: ExitPoint
+INFO Exit point created at: (2436.000000, 0.000000)
+INFO Player stats - Health: 50.000000, Armor: 20.000000
+INFO 50.000000
+INFO 20.000000
+WARNING Sound file does not exist at path: Resources\Sounds\swamp_low_quality.wav
+INFO Attempting to add sound: ambient from path: Resources\Sounds\swamp_low_quality.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: ambient
+INFO Sound verified in map: ambient
+INFO Attempting to add sound: hit from path: Resources\Sounds\AppleEat.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: hit
+INFO Sound verified in map: hit
+INFO PlaySound called for: ambient
+INFO Sound found in map, attempting to play
+INFO Play command sent to sound component
+INFO player Pos after create level (-5.000000, -5.000000)
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+INFO Enemy created
+INFO Enemy stats - Health: 100.000000, Armor: 5.000000
+INFO 100.000000
+INFO 5.000000
+INFO Attempting to add sound: kill from path: Resources\Sounds\Kill.wav
+INFO Sound file loaded successfully
+INFO Sound added to map: kill
+INFO Sound verified in map: kill
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 510.000000,280.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,300.000000 Size: 200.000000x50.000000
+DEBUG Button transform - Pos: 530.000000,370.000000 Size: 200.000000x50.000000
+DEBUG TriggerEnter detected between: 2467903285792 and 2467903284064
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED START POINT at (0.000000, 0.000000)
+INFO LevelStartEvent received!
+INFO Player detected level start point
+DEBUG TriggerEnter detected between: 2467903282768 and 2467903284064
+DEBUG Trigger with object: Player
+DEBUG Object entered point: Player
+INFO PLAYER ENTERED EXIT POINT at (2436.000000, 0.000000)

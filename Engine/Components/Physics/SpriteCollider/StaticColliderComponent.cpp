@@ -12,7 +12,7 @@ namespace Engine
 			rigidBody = gameObject->AddComponent<RigidbodyComponent>();
 		}
 		rigidBody->SetKinematic(true);
-		rigidBody->SetLinearDamping(1.0f);
+		rigidBody->SetLinearDamping(8.1f);
 	}
 
 	void StaticColliderComponent::Update(float deltaTime)
