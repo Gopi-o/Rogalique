@@ -208,6 +208,7 @@ namespace RogaliqueGame
 
 		if (stats->GetHealth() <= 0)
 		{
+			stats->SetHealth(0);
 			LOG_INFO("Player died!");
 			// Обработка смерти игрока
 		}

@@ -28,10 +28,12 @@ namespace Engine
 		void Unsubscribe(const std::string& eventType, EventCallback callback)
 		{
 			auto& callbacks = listeners[eventType];
+			auto target = callback.target<void (*)(const EventsTemp&)>();
+
 			callbacks.erase(
 				std::remove_if(callbacks.begin(), callbacks.end(),
-					[&callback](const EventCallback& cb) {
-						return cb.target_type() == callback.target_type();
+					[target](const EventCallback& cb) {
+						return cb.target<void (*)(const EventsTemp&)>() == target;
 					}),
 				callbacks.end());
 		}

@@ -111,6 +111,11 @@ namespace RogaliqueGame
 				enemy->Update(deltaTime);
 			}
 		}
+		else
+		{
+			if (!hud->IsPaused())
+				bIsPaused = !bIsPaused;
+		}
 	}
 
 	void DeveloperLevel::HandleEvent(const sf::Event& event)

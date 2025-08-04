@@ -25,40 +25,38 @@ namespace Engine
 		sf::Clock gameClock;
 		sf::Event event;
 
+		const float FIXED_TIMESTEP = 1.0f / 60.0f;
+		float accumulator = 0.0f;
+
 		while (RenderSystem::Instance()->GetMainWindow().isOpen())
 		{
-			sf::Time dt = gameClock.restart();
-			float deltaTime = dt.asSeconds();
-
 			while (RenderSystem::Instance()->GetMainWindow().pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
-				{
 					RenderSystem::Instance()->GetMainWindow().close();
-				}
+
 				GameStateManager::Instance()->HandleEvent(event);
 				if (currentScene)
-				{
 					currentScene->HandleEvent(event);
-				}
 			}
 
 			if (!RenderSystem::Instance()->GetMainWindow().isOpen())
-			{
 				break;
+
+			float deltaTime = gameClock.restart().asSeconds();
+			accumulator += deltaTime;
+
+			while (accumulator >= FIXED_TIMESTEP)
+			{
+				GameStateManager::Instance()->UpdateCurrentScene(FIXED_TIMESTEP);
+				GameWorld::Instance()->Update(FIXED_TIMESTEP);
+				PhysicsSystem::Instance()->Update();
+
+				accumulator -= FIXED_TIMESTEP;
 			}
 
 			RenderSystem::Instance()->GetMainWindow().clear();
 
-
-			/*if (currentScene)
-			{
-				currentScene->Update(deltaTime);
-			}*/
-
-			GameStateManager::Instance()->UpdateCurrentScene(deltaTime);
-			GameWorld::Instance()->Update(deltaTime);
-			PhysicsSystem::Instance()->Update();
 			GameWorld::Instance()->Render();
 			GameWorld::Instance()->LateUpdate();
 

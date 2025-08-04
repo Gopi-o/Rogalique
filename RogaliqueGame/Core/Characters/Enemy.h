@@ -28,7 +28,7 @@ namespace RogaliqueGame
 		float enemyArmor = 5.0f;
 
 		// Attack stats
-		float moveSpeed = 0.35f;
+		float moveSpeed = 3.9f;
 		float detectionRange = 300.0f;
 		float attackRange = 50.0f;
 		float attackCooldown = 2.6f;

@@ -19,6 +19,8 @@ namespace Engine
 
 	void AttackSystem::PerformAttack(const std::string& attackName)
 	{
+		if (!gameObject)
+			return;
 		auto it = m_attacks.find(attackName);
 		if (it == m_attacks.end() || m_cooldowns[attackName] > 0)
 			return;
@@ -58,7 +60,7 @@ namespace Engine
 		// Нанесение урона целям
 		for (auto target : targets)
 		{
-			if (target == gameObject)
+			if (!target || target == gameObject)
 				continue;
 
 			bool isValidTarget = false;
