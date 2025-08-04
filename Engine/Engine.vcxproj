@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{0785589b-6e7e-4d86-9dbe-ce7aa50d6b3f}</ProjectGuid>
-    <RootNamespace>XYZEngine</RootNamespace>
+    <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,6 +72,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)RogaliqueGame\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)RogaliqueGame\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +119,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML\SFML-2.5.1\include;$(SolutionDir)Engine</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,12 +140,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;NOMINMAX;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML\SFML-2.5.1\include;$(SolutionDir)Engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -158,79 +162,107 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="DamageableComponent.h" />
-    <ClInclude Include="EffectComponent.h" />
-    <ClInclude Include="EventsTemp.h" />
-    <ClInclude Include="EventSystem.h" />
-    <ClInclude Include="FloorComponent.h" />
-    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="Components\UI\Button.h" />
+    <ClInclude Include="Components\GamePlay\AttackSystems\AttackSystem.h" />
+    <ClInclude Include="Components\UI\Canvas.h" />
+    <ClInclude Include="Components\Physics\Actor\ActorComponent.h" />
+    <ClInclude Include="Components\Render\Camera\CameraComponent.h" />
+    <ClInclude Include="Components\Physics\Collider\ColliderComponent.h" />
+    <ClInclude Include="Components\Physics\Collision\Collision.h" />
+    <ClInclude Include="Components\Component.h" />
+    <ClInclude Include="Components\GamePlay\Damageable\DamageableComponent.h" />
+    <ClInclude Include="Components\GamePlay\Effect\EffectComponent.h" />
+    <ClInclude Include="Components\Physics\SpriteCollider\StaticColliderComponent.h" />
+    <ClInclude Include="Components\Render\MazeGeneratorComponent.h" />
+    <ClInclude Include="Components\Physics\Actor\A_test\LevelPointsComponent.h" />
+    <ClInclude Include="Components\UI\Layout.h" />
+    <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="Core\GameStateManager.h" />
+    <ClInclude Include="Math\RandomHelper.h" />
+    <ClInclude Include="Systems\FileMaster\FileMaster.h" />
+    <ClInclude Include="Systems\Event\EventsTemp.h" />
+    <ClInclude Include="Systems\Event\EventSystem.h" />
+    <ClInclude Include="Components\Render\Floor\FloorComponent.h" />
+    <ClInclude Include="Core\GameEngine\GameEngine.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameWorld.h" />
-    <ClInclude Include="IDelayedAction.h" />
-    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="Core\GameObject\GameObject.h" />
+    <ClInclude Include="Core\GameWorld\GameWorld.h" />
+    <ClInclude Include="Math\IDelayedAction.h" />
+    <ClInclude Include="Components\GamePlay\Input\InputComponent.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="Matrix2D.h" />
+    <ClInclude Include="Editor\LevelEditor.h" />
+    <ClInclude Include="Systems\Logger.h" />
+    <ClInclude Include="Math\Matrix2D.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="randomizer.h" />
-    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Systems\Physics\PhysicsSystem.h" />
+    <ClInclude Include="Math\randomizer.h" />
+    <ClInclude Include="Systems\Render\RenderSystem.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ResourceSystem.h" />
-    <ClInclude Include="RigidbodyComponent.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SoundComponent.h" />
-    <ClInclude Include="SoundManagerComponent.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteColliderComponent.h" />
-    <ClInclude Include="SpriteRendererComponent.h" />
-    <ClInclude Include="StatsComponent.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="Trigger.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="WallComponent.h" />
+    <ClInclude Include="Systems\Resource\ResourceSystem.h" />
+    <ClInclude Include="Components\Physics\Rigidbody\RigidbodyComponent.h" />
+    <ClInclude Include="Core\Scene.h" />
+    <ClInclude Include="Components\Sound\SoundComponent.h" />
+    <ClInclude Include="Components\Sound\SoundManagerComponent.h" />
+    <ClInclude Include="ResourceSystem\Sprite.h" />
+    <ClInclude Include="Components\Physics\SpriteCollider\SpriteColliderComponent.h" />
+    <ClInclude Include="Components\Render\SpriteRenderer\SpriteRendererComponent.h" />
+    <ClInclude Include="Components\GamePlay\Stats\StatsComponent.h" />
+    <ClInclude Include="Components\Physics\Transform\TransformComponent.h" />
+    <ClInclude Include="Systems\Trigger\Trigger.h" />
+    <ClInclude Include="Math\Vector.h" />
+    <ClInclude Include="Components\Render\Wall\WallComponent.h" />
+    <ClInclude Include="Components\UI\Widget.h" />
+    <ClInclude Include="Components\UI\TextBlock.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CameraComponent.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="DamageableComponent.cpp" />
-    <ClCompile Include="EffectComponent.cpp" />
-    <ClCompile Include="EventsTemp.cpp" />
-    <ClCompile Include="EventSystem.cpp" />
-    <ClCompile Include="FloorComponent.cpp" />
-    <ClCompile Include="GameEngine.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameWorld.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="Matrix2D.cpp" />
+    <ClCompile Include="Components\UI\Button.cpp" />
+    <ClCompile Include="Components\GamePlay\AttackSystems\AttackSystem.cpp" />
+    <ClCompile Include="Components\UI\Canvas.cpp" />
+    <ClCompile Include="Components\Physics\Actor\ActorComponent.cpp" />
+    <ClCompile Include="Components\Render\Camera\CameraComponent.cpp" />
+    <ClCompile Include="Components\Physics\Collider\ColliderComponent.cpp" />
+    <ClCompile Include="Components\Physics\Collision\Collision.cpp" />
+    <ClCompile Include="Components\Component.cpp" />
+    <ClCompile Include="Components\GamePlay\Damageable\DamageableComponent.cpp" />
+    <ClCompile Include="Components\GamePlay\Effect\EffectComponent.cpp" />
+    <ClCompile Include="Components\Physics\SpriteCollider\StaticColliderComponent.cpp" />
+    <ClCompile Include="Components\Render\MazeGeneratorComponent.cpp" />
+    <ClCompile Include="Components\Physics\Actor\A_test\LevelPointsComponent.cpp" />
+    <ClCompile Include="Components\UI\Layout.cpp" />
+    <ClCompile Include="Components\UI\Image.cpp" />
+    <ClCompile Include="Core\GameStateManager.cpp" />
+    <ClCompile Include="Math\RandomHelper.cpp" />
+    <ClCompile Include="Systems\FileMaster\FileMaster.cpp" />
+    <ClCompile Include="Systems\Event\EventsTemp.cpp" />
+    <ClCompile Include="Systems\Event\EventSystem.cpp" />
+    <ClCompile Include="Components\Render\Floor\FloorComponent.cpp" />
+    <ClCompile Include="Core\GameEngine\GameEngine.cpp" />
+    <ClCompile Include="Core\GameObject\GameObject.cpp" />
+    <ClCompile Include="Core\GameWorld\GameWorld.cpp" />
+    <ClCompile Include="Components\GamePlay\Input\InputComponent.cpp" />
+    <ClCompile Include="Editor\LevelEditor.cpp" />
+    <ClCompile Include="Math\Matrix2D.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="ResourceSystem.cpp" />
-    <ClCompile Include="RigidbodyComponent.cpp" />
-    <ClCompile Include="SoundComponent.cpp" />
-    <ClCompile Include="SoundManagerComponent.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteColliderComponent.cpp" />
-    <ClCompile Include="SpriteRendererComponent.cpp" />
-    <ClCompile Include="StatsComponent.cpp" />
-    <ClCompile Include="TransformComponent.cpp" />
-    <ClCompile Include="Trigger.cpp" />
-    <ClCompile Include="WallComponent.cpp" />
+    <ClCompile Include="Systems\Physics\PhysicsSystem.cpp" />
+    <ClCompile Include="Systems\Render\RenderSystem.cpp" />
+    <ClCompile Include="Systems\Resource\ResourceSystem.cpp" />
+    <ClCompile Include="Components\Physics\Rigidbody\RigidbodyComponent.cpp" />
+    <ClCompile Include="Components\Sound\SoundComponent.cpp" />
+    <ClCompile Include="Components\Sound\SoundManagerComponent.cpp" />
+    <ClCompile Include="ResourceSystem\Sprite.cpp" />
+    <ClCompile Include="Components\Physics\SpriteCollider\SpriteColliderComponent.cpp" />
+    <ClCompile Include="Components\Render\SpriteRenderer\SpriteRendererComponent.cpp" />
+    <ClCompile Include="Components\GamePlay\Stats\StatsComponent.cpp" />
+    <ClCompile Include="Components\Physics\Transform\TransformComponent.cpp" />
+    <ClCompile Include="Systems\Trigger\Trigger.cpp" />
+    <ClCompile Include="Components\Render\Wall\WallComponent.cpp" />
+    <ClCompile Include="Components\UI\Widget.cpp" />
+    <ClCompile Include="Components\UI\TextBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc" />

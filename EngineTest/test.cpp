@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Vector.h"
+#include <Math/Vector.h>
 
 TEST(VectorTests, ZeroContructor)
 {
