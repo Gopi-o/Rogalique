@@ -18,6 +18,12 @@ namespace Engine
 		}
 
 		sf::Texture* newTexture = new sf::Texture;
+		if (!newTexture->loadFromFile(sourcePath))
+		{
+			LOG_ERROR("Failed to load texture '" + name + "' from: " + sourcePath);
+			delete newTexture;
+			return;
+		}
 		if (newTexture->loadFromFile(sourcePath))
 		{
 			newTexture->setSmooth(isSwooth);

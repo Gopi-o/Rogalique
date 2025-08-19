@@ -4,7 +4,7 @@
 :: Step 1: Define paths
 set SOLUTION_PATH=Game.sln
 set MSBUILD_PATH="E:\Microsoft\VisualStudio\MSBuild\Current\Bin\amd64\MSBuild.exe"
-set CONFIGURATION=Debug
+set CONFIGURATION=Release
 set PLATFORM=x64
 
 :: Step 2: Check if MSBuild exists

@@ -65,23 +65,31 @@ namespace Engine
 
 	void ColliderComponent::OnCollision(Collision collision)
 	{
-		for (int i = 0; i < onCollisionActions.size(); i++)
+
+		auto actions = onCollisionActions;
+		for (auto& fn : actions)
 		{
-			onCollisionActions[i](collision);
+			if (fn)
+				fn(collision);
 		}
 	}
 	void ColliderComponent::OnTriggerEnter(Trigger trigger)
 	{
-		for (int i = 0; i < onTriggerEnterActions.size(); i++)
+
+		auto actions = onTriggerEnterActions;
+		for (auto& fn : actions)
 		{
-			onTriggerEnterActions[i](trigger);
+			if (fn)
+				fn(trigger);
 		}
 	}
 	void ColliderComponent::OnTriggerExit(Trigger trigger)
 	{
-		for (int i = 0; i < onTriggerExitActions.size(); i++)
+		auto actions = onTriggerExitActions;
+		for (auto& fn : actions)
 		{
-			onTriggerExitActions[i](trigger);
+			if (fn)
+				fn(trigger);
 		}
 	}
 } // namespace Engine

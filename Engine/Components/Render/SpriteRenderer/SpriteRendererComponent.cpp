@@ -52,9 +52,14 @@ namespace Engine
 
 	void SpriteRendererComponent::SetPixelSize(int newWidth, int newHeight)
 	{
-		auto originalSize = sprite->getTexture()->getSize();
-		// sprite->setScale((float)newWidth / (float)originalSize.x, -(float)newHeight / (float)originalSize.y);
-		scale = { (float)newWidth / (float)originalSize.x, -(float)newHeight / (float)originalSize.y };
+		auto tex = sprite->getTexture();
+		if (!tex)
+			return;
+		sf::IntRect rect = sprite->getTextureRect();
+		sf::Vector2u base = (rect.width > 0 && rect.height > 0)
+			? sf::Vector2u(rect.width, rect.height)
+			: tex->getSize();
+		scale = { (float)newWidth / (float)base.x, -(float)newHeight / (float)base.y };
 	};
 
 	void SpriteRendererComponent::FlipX(bool flip)

@@ -11,7 +11,7 @@ namespace Engine
 	{
 	}
 
-	// Главная генерация лабиринта с параметрами
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	void MazeGeneratorComponent::Generate(int width, int height, float cellSize, float wallThickness)
 	{
 		this->mazeWidth = std::max(5, width);
@@ -22,18 +22,19 @@ namespace Engine
 		Clear();
 		InitializeGrid();
 		GenerateMazeDFS();
+		CreateMazeFloor();
 		CreateMazeWalls();
 		SetStartAndEndPoints();
 		GenerateSpawnPoints(5, 3);
 	}
 
-	// Можно расширить если надо будет что-то очищать.
+	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	void MazeGeneratorComponent::Clear()
 	{
-		// Например очистка сгенерированных стен
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	}
 
-	// Получени позиции стартовой точки в лабиринте
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Vector2Df MazeGeneratorComponent::GetStartPointPos() const
 	{
 		Vector2Df pos;
@@ -43,16 +44,16 @@ namespace Engine
 		return pos;
 	}
 
-	// Генерация точек по кторым потом можно будет спавнить что-либо
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ
 	void MazeGeneratorComponent::GenerateSpawnPoints(int enemyCount, int itemCount)
 	{
 		enemySpawnPoints.clear();
 		itemSpawnPoints.clear();
 
-		// Переменная с позициями для спавна
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		std::vector<Vector2Df> validPointsPosition;
 
-		// Получение общее количество куда можно поставить спавнер
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		for (int x = 0; x < mazeWidth; x++)
 		{
 			for (int y = 0; y < mazeHeight; y++)
@@ -68,7 +69,7 @@ namespace Engine
 			}
 		}
 
-		// Заполнение точек для установления точек для спавнеров врагов
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		for (int i = 0; i < enemyCount && !validPointsPosition.empty(); i++)
 		{
 			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
@@ -76,7 +77,7 @@ namespace Engine
 			validPointsPosition.erase(validPointsPosition.begin() + index);
 		}
 
-		// Заполнение точек для установления точек для спавнеров итемов
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		for (int i = 0; i < itemCount && !validPointsPosition.empty(); i++)
 		{
 			int index = RandomHelper::Int(0, validPointsPosition.size() - 1);
@@ -85,12 +86,12 @@ namespace Engine
 		}
 	}
 
-	// Инициализация сетки
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	void MazeGeneratorComponent::InitializeGrid()
 	{
 		mazeGrid.resize(mazeHeight, std::vector<Cell>(mazeWidth));
 
-		// Начальная позиция для генерации
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		int startX = RandomHelper::Int(0, mazeWidth - 1);
 		int startY = RandomHelper::Int(0, mazeHeight - 1);
 		/*int startX = rand() % mazeWidth;
@@ -100,12 +101,12 @@ namespace Engine
 		generationStack.push(Vector2Df(startX, startY));
 	}
 
-	// Генерация лабиринта путем прохода в глубину
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	void MazeGeneratorComponent::GenerateMazeDFS()
 	{
 		std::vector<std::vector<bool>> visited(mazeHeight, std::vector<bool>(mazeWidth, false));
 		auto start = generationStack.top();
-		mazeGrid[start.y][start.x].depth = 0; // Стартовая клетка имеет глубину 0
+		mazeGrid[start.y][start.x].depth = 0; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 0
 		visited[start.y][start.x] = true;
 
 		while (!generationStack.empty())
@@ -118,14 +119,14 @@ namespace Engine
 			{
 				generationStack.push(current);
 
-				// Выбор случайного соседа
+				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				auto next = neighbors[RandomHelper::Int(0, neighbors.size() - 1)];
 
-				// Устанавливаем глубину (текущая глубина + 1)
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ + 1)
 				mazeGrid[next.y][next.x].depth = mazeGrid[current.y][current.x].depth + 1;
 				// auto next = neighbors[rand() % neighbors.size()];
 
-				// Удаляем стену между текущей и следующей клеткой
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				if (next.x == current.x + 1)
 				{
 					mazeGrid[current.y][current.x].eastWall = false;
@@ -172,7 +173,7 @@ namespace Engine
 		return neighbors;
 	}
 
-	// Установление точек старта и конца
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 	void MazeGeneratorComponent::SetStartAndEndPoints()
 	{
 		if (StartPoint)
@@ -247,5 +248,22 @@ namespace Engine
 	void MazeGeneratorComponent::CreateWall(const Vector2Df& position, float width, float height)
 	{
 		auto wall = LevelEditor::Instance()->CreateWall(position, width, height);
+	}
+
+	void MazeGeneratorComponent::CreateFloor(const Vector2Df& position, float width, float height)
+	{
+		auto wall = LevelEditor::Instance()->CreateFloor(position, width, height);
+	}
+
+	void MazeGeneratorComponent::CreateMazeFloor()
+	{
+		for (int y = 0; y < mazeHeight; y++)
+		{
+			for (int x = 0; x < mazeWidth; x++)
+			{
+				Vector2Df cellPos(x * cellSize, y * cellSize);
+				LevelEditor::Instance()->CreateFloor(cellPos, cellSize, cellSize);
+			}
+		}
 	}
 } // namespace Engine

@@ -179,6 +179,7 @@
     <ClInclude Include="Components\UI\Image.h" />
     <ClInclude Include="Core\GameStateManager.h" />
     <ClInclude Include="Math\RandomHelper.h" />
+    <ClInclude Include="Components\Render\SpriteRenderer\SpriteAnimator.h" />
     <ClInclude Include="Systems\FileMaster\FileMaster.h" />
     <ClInclude Include="Systems\Event\EventsTemp.h" />
     <ClInclude Include="Systems\Event\EventSystem.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="Core\GameStateManager.cpp" />
     <ClCompile Include="Math\RandomHelper.cpp" />
+    <ClCompile Include="Components\Render\SpriteRenderer\SpriteAnimator.cpp" />
     <ClCompile Include="Systems\FileMaster\FileMaster.cpp" />
     <ClCompile Include="Systems\Event\EventsTemp.cpp" />
     <ClCompile Include="Systems\Event\EventSystem.cpp" />
