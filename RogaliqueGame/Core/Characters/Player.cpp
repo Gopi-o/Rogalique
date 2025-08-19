@@ -3,12 +3,13 @@
 #include <Systems/Resource/ResourceSystem.h>
 #include <Components/Sound/SoundManagerComponent.h>
 #include <filesystem>
-#include <Editor/LevelEditor.h>"
+#include <Editor/LevelEditor.h>
 #include "../../Stats/UnitStatsComponent.h"
 #include <Components/GamePlay/Effect/EffectComponent.h>
 #include <Components/Physics/Actor/A_test/LevelPointsComponent.h>
 #include <Components/GamePlay/AttackSystems/AttackSystem.h>
 #include <Core/GameStateManager.h>
+#include <Components/Render/SpriteRenderer/SpriteAnimator.h>
 
 namespace RogaliqueGame
 {
@@ -41,6 +42,14 @@ namespace RogaliqueGame
 	void Player::Update(float deltaTime)
 	{
 		auto input = gameObject->GetComponent<Engine::InputComponent>();
+
+		auto animator = gameObject->GetComponent<Engine::SpriteAnimator>();
+		if (input && animator)
+		{
+			animator->SetDirectionFromInput({ input->GetHorizontalAxis(), input->GetVerticalAxis() });
+			LOG_INFO(std::to_string(input->GetHorizontalAxis()) + std::to_string(input->GetVerticalAxis()));
+		}
+
 		auto rigidbody = gameObject->GetComponent<Engine::RigidbodyComponent>();
 		auto attackSystem = gameObject->GetComponent<Engine::AttackSystem>();
 
@@ -95,13 +104,23 @@ namespace RogaliqueGame
 		auto damageable = gameObject->AddComponent<Engine::DamageableComponent>();
 		auto effectComponent = gameObject->AddComponent<Engine::EffectComponent>();
 
-		playerRenderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("ball"));
+		playerRenderer->SetTexture(*Engine::ResourceSystem::Instance()->GetTextureShared("playertileset"));
 		playerRenderer->SetPixelSize(32, 32);
 		playerCamera->SetBaseResolution(1280, 720);
 
-		// Ввод и звук
-
-		// GamePlay
+		auto animator = gameObject->AddComponent<Engine::SpriteAnimator>();
+		animator->SetSpriteSheet("playertileset", 32, 32); // заменить на реальный атлас
+		animator->SetAutoByVelocity(false);
+		using S = Engine::SpriteAnimator::State;
+		using D = Engine::SpriteAnimator::Dir;
+		animator->SetAnimation(S::Idle, D::Down, 7, 0, 2, 30.f);
+		animator->SetAnimation(S::Idle, D::Left, 6, 0, 2, 30.f);
+		animator->SetAnimation(S::Idle, D::Right, 4, 0, 2, 30.f);
+		animator->SetAnimation(S::Idle, D::Up, 5, 0, 2, 30.f);
+		animator->SetAnimation(S::Move, D::Down, 0, 0, 6, 10.f);
+		animator->SetAnimation(S::Move, D::Left, 3, 0, 6, 10.f);
+		animator->SetAnimation(S::Move, D::Right, 1, 0, 6, 10.f);
+		animator->SetAnimation(S::Move, D::Up, 2, 0, 6, 10.f);
 	}
 	void Player::SetupInputBind()
 	{

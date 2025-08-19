@@ -30,6 +30,8 @@ namespace Engine
 			return;
 
 		auto collider = gameObject->GetComponent<ColliderComponent>();
+		if (!collider)
+			return;
 		if (!collider->GetGameObject())
 			return;
 		collider->UnsubscribeCollision(m_collisionHandler);
@@ -39,9 +41,9 @@ namespace Engine
 
 	void ActorComponent::Update(float deltaTime)
 	{
-		m_triggerEnterHandler = [this](Trigger trigger) {
+		/*m_triggerEnterHandler = [this](Trigger trigger) {
 			HandleTriggerEnter(trigger);
-		};
+		};*/
 		if (!m_isActive)
 		{
 			LOG_DEBUG("ActorComponent skipped update - not active");
@@ -52,7 +54,7 @@ namespace Engine
 		if (transform)
 		{
 			auto pos = transform->GetWorldPosition();
-			if (m_visualRepresentation) // Опционально, если нужен только для рендеринга
+			if (m_visualRepresentation) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_visualRepresentation->setPosition(pos.x, pos.y);
 		}
 		else
@@ -172,7 +174,7 @@ namespace Engine
 	{
 		if (!m_isActive)
 			return;
-		// Базовая обработка коллизий
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	}
 
 	void ActorComponent::HandleTriggerEnter(Trigger trigger)

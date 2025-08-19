@@ -34,6 +34,7 @@ int main()
 	ResourceSystem::Instance()->LoadTexture("exit", "Resources/Textures/exit.png");
 	ResourceSystem::Instance()->LoadTexture("health_icon", "Resources/Textures/BodyBend.png");
 	Engine::ResourceSystem::Instance()->LoadTexture("ball", "Resources/Textures/player000.png");
+	Engine::ResourceSystem::Instance()->LoadTexture("playertileset", "Resources/Textures/character_robot_sheetHD.png");
 	Engine::ResourceSystem::Instance()->LoadTexture("enemy", "Resources/Textures/enemy0.png");
 	ResourceSystem::Instance()->LoadTexture("button_normal_menu", "Resources/Textures/nomal_menus_Button.png");
 	ResourceSystem::Instance()->LoadTexture("button_hovered", "Resources/Textures/button_hovere.png");
