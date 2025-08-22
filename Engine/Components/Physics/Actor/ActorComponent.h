@@ -55,18 +55,18 @@ namespace Engine
 		GameObject* GetOtherFromTrigger(GameObject* current, Trigger trigger) const;
 		Vector2Df GetPosition() const;
 
-		bool m_isActive;
-		sf::Sprite* m_visualRepresentation;
-		bool m_interactOnTriggerEnter;
-		bool m_interactOnTriggerExit;
-		bool m_interactOnCommand;
+		bool isActive;
+		sf::Sprite* visualRepresentation;
+		bool interactOnTriggerEnter;
+		bool interactOnTriggerExit;
+		bool interactOnCommand;
 
-		std::vector<std::function<void(GameObject*)>> m_onInteractCallbacks;
-		std::vector<std::function<void(GameObject*)>> m_onEnterCallbacks;
-		std::vector<std::function<void(GameObject*)>> m_onExitCallbacks;
+		std::vector<std::function<void(GameObject*)>> onInteractCallbacks;
+		std::vector<std::function<void(GameObject*)>> onEnterCallbacks;
+		std::vector<std::function<void(GameObject*)>> onExitCallbacks;
 
-		std::function<void(Collision)> m_collisionHandler;
-		std::function<void(Trigger)> m_triggerEnterHandler;
-		std::function<void(Trigger)> m_triggerExitHandler;
+		std::function<void(Collision)> collisionHandler;
+		std::function<void(Trigger)> triggerEnterHandler;
+		std::function<void(Trigger)> triggerExitHandler;
 	};
 } // namespace Engine

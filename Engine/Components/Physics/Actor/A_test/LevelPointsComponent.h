@@ -43,10 +43,10 @@ namespace Engine
 
 	private:
 		bool IsPlayerEnter(GameObject* obj) const;
-		GameObject* m_startPoint = nullptr;
-		GameObject* m_endPoint = nullptr;
-		bool m_isStartPoint = false;
-		bool m_isEndPoint = false;
+		GameObject* startPoint = nullptr;
+		GameObject* endPoint = nullptr;
+		bool isStartPoint = false;
+		bool isEndPoint = false;
 		int activated = 0;
 	};
 } // namespace Engine

@@ -7,20 +7,20 @@
 namespace Engine
 {
 	ActorComponent::ActorComponent(GameObject* gameObject)
-		: Component(gameObject), m_isActive(true), m_visualRepresentation(nullptr), m_interactOnTriggerEnter(false), m_interactOnTriggerExit(false), m_interactOnCommand(false)
+		: Component(gameObject), isActive(true), visualRepresentation(nullptr), interactOnTriggerEnter(false), interactOnTriggerExit(false), interactOnCommand(false)
 	{
-		m_collisionHandler = [this](Collision collision) { HandleCollision(collision); };
-		m_triggerEnterHandler = [this](Trigger trigger) {
+		collisionHandler = [this](Collision collision) { HandleCollision(collision); };
+		triggerEnterHandler = [this](Trigger trigger) {
 			HandleTriggerEnter(trigger);
 		};
-		m_triggerExitHandler = [this](Trigger trigger) { HandleTriggerExit(trigger); };
+		triggerExitHandler = [this](Trigger trigger) { HandleTriggerExit(trigger); };
 
 		auto collider = gameObject->GetComponent<ColliderComponent>();
 		if (collider)
 		{
-			collider->SubscribeCollision(m_collisionHandler);
-			collider->SubscribeTriggerEnter(m_triggerEnterHandler);
-			collider->SubscribeTriggerExit(m_triggerExitHandler);
+			collider->SubscribeCollision(collisionHandler);
+			collider->SubscribeTriggerEnter(triggerEnterHandler);
+			collider->SubscribeTriggerExit(triggerExitHandler);
 		}
 	}
 
@@ -34,9 +34,9 @@ namespace Engine
 			return;
 		if (!collider->GetGameObject())
 			return;
-		collider->UnsubscribeCollision(m_collisionHandler);
-		collider->UnsubscribeTriggerEnter(m_triggerEnterHandler);
-		collider->UnsubscribeTriggerExit(m_triggerExitHandler);
+		collider->UnsubscribeCollision(collisionHandler);
+		collider->UnsubscribeTriggerEnter(triggerEnterHandler);
+		collider->UnsubscribeTriggerExit(triggerExitHandler);
 	}
 
 	void ActorComponent::Update(float deltaTime)
@@ -44,7 +44,7 @@ namespace Engine
 		/*m_triggerEnterHandler = [this](Trigger trigger) {
 			HandleTriggerEnter(trigger);
 		};*/
-		if (!m_isActive)
+		if (!isActive)
 		{
 			LOG_DEBUG("ActorComponent skipped update - not active");
 			return;
@@ -54,8 +54,8 @@ namespace Engine
 		if (transform)
 		{
 			auto pos = transform->GetWorldPosition();
-			if (m_visualRepresentation) // �����������, ���� ����� ������ ��� ����������
-				m_visualRepresentation->setPosition(pos.x, pos.y);
+			if (visualRepresentation) // �����������, ���� ����� ������ ��� ����������
+				visualRepresentation->setPosition(pos.x, pos.y);
 		}
 		else
 		{
@@ -65,30 +65,30 @@ namespace Engine
 
 	void ActorComponent::Render()
 	{
-		if (!m_isActive || !m_visualRepresentation)
+		if (!isActive || !visualRepresentation)
 			return;
-		RenderSystem::Instance()->Render(*m_visualRepresentation);
+		RenderSystem::Instance()->Render(*visualRepresentation);
 	}
 
 	void ActorComponent::Activate()
 	{
-		if (m_isActive)
+		if (isActive)
 			return;
-		m_isActive = true;
+		isActive = true;
 		OnActivated();
 	}
 
 	void ActorComponent::Deactivate()
 	{
-		if (!m_isActive)
+		if (!isActive)
 			return;
-		m_isActive = false;
+		isActive = false;
 		OnDeactivated();
 	}
 
 	bool ActorComponent::IsActive() const
 	{
-		return m_isActive;
+		return isActive;
 	}
 
 	void ActorComponent::EnableInteraction(InteractionType type, bool enable)
@@ -96,13 +96,13 @@ namespace Engine
 		switch (type)
 		{
 			case InteractionType::OnTriggerEnter:
-				m_interactOnTriggerEnter = enable;
+				interactOnTriggerEnter = enable;
 				break;
 			case InteractionType::OnTriggerExit:
-				m_interactOnTriggerExit = enable;
+				interactOnTriggerExit = enable;
 				break;
 			case InteractionType::OnInteract:
-				m_interactOnCommand = enable;
+				interactOnCommand = enable;
 				break;
 		}
 	}
@@ -112,11 +112,11 @@ namespace Engine
 		switch (type)
 		{
 			case InteractionType::OnTriggerEnter:
-				return m_interactOnTriggerEnter;
+				return interactOnTriggerEnter;
 			case InteractionType::OnTriggerExit:
-				return m_interactOnTriggerExit;
+				return interactOnTriggerExit;
 			case InteractionType::OnInteract:
-				return m_interactOnCommand;
+				return interactOnCommand;
 			default:
 				return false;
 		}
@@ -127,13 +127,13 @@ namespace Engine
 		switch (type)
 		{
 			case InteractionType::OnTriggerEnter:
-				m_onEnterCallbacks.push_back(callback);
+				onEnterCallbacks.push_back(callback);
 				break;
 			case InteractionType::OnTriggerExit:
-				m_onExitCallbacks.push_back(callback);
+				onExitCallbacks.push_back(callback);
 				break;
 			case InteractionType::OnInteract:
-				m_onInteractCallbacks.push_back(callback);
+				onInteractCallbacks.push_back(callback);
 				break;
 		}
 	}
@@ -141,8 +141,8 @@ namespace Engine
 	void ActorComponent::UnsubscribeOnInteraction(InteractionType type, std::function<void(GameObject*)> callback)
 	{
 		auto& callbacks =
-			(type == InteractionType::OnTriggerEnter) ? m_onEnterCallbacks : (type == InteractionType::OnTriggerExit) ? m_onExitCallbacks
-																													  : m_onInteractCallbacks;
+			(type == InteractionType::OnTriggerEnter) ? onEnterCallbacks : (type == InteractionType::OnTriggerExit) ? onExitCallbacks
+																													: onInteractCallbacks;
 
 		callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(),
 							[&callback](const std::function<void(GameObject*)>& cb) {
@@ -153,13 +153,13 @@ namespace Engine
 
 	void ActorComponent::SetVisualRepresentation(sf::Sprite* sprite)
 	{
-		m_visualRepresentation = sprite;
-		if (m_visualRepresentation)
+		visualRepresentation = sprite;
+		if (visualRepresentation)
 		{
 			auto transform = gameObject->GetComponent<TransformComponent>();
 			if (transform)
 			{
-				m_visualRepresentation->setPosition(transform->GetWorldPosition().x,
+				visualRepresentation->setPosition(transform->GetWorldPosition().x,
 					transform->GetWorldPosition().y);
 			}
 		}
@@ -167,12 +167,12 @@ namespace Engine
 
 	sf::Sprite* ActorComponent::GetVisualRepresentation() const
 	{
-		return m_visualRepresentation;
+		return visualRepresentation;
 	}
 
 	void ActorComponent::HandleCollision(Collision collision)
 	{
-		if (!m_isActive)
+		if (!isActive)
 			return;
 		// ������� ��������� ��������
 	}
@@ -181,7 +181,7 @@ namespace Engine
 	{
 		LOG_DEBUG("TriggerEnter detected between: " + std::to_string(reinterpret_cast<uintptr_t>(trigger.GetFirst())) + " and " + std::to_string(reinterpret_cast<uintptr_t>(trigger.GetSecond())));
 
-		if (!m_isActive || !m_interactOnTriggerEnter)
+		if (!isActive || !interactOnTriggerEnter)
 			return;
 
 		GameObject* other = GetOtherFromTrigger(gameObject, trigger);
@@ -194,7 +194,7 @@ namespace Engine
 		LOG_DEBUG("Trigger with object: " + other->GetTag());
 		OnPlayerEnter(other);
 
-		for (auto& callback : m_onEnterCallbacks)
+		for (auto& callback : onEnterCallbacks)
 		{
 			callback(other);
 		}
@@ -202,7 +202,7 @@ namespace Engine
 
 	void ActorComponent::HandleTriggerExit(Trigger trigger)
 	{
-		if (!m_isActive || !m_interactOnTriggerExit)
+		if (!isActive || !interactOnTriggerExit)
 			return;
 
 		GameObject* other = GetOtherFromTrigger(gameObject, trigger);
@@ -211,7 +211,7 @@ namespace Engine
 
 		OnPlayerExit(other);
 
-		for (auto& callback : m_onExitCallbacks)
+		for (auto& callback : onExitCallbacks)
 		{
 			callback(other);
 		}

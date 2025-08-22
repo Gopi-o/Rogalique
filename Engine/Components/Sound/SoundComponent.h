@@ -24,8 +24,8 @@ namespace Engine
 		sf::SoundSource::Status GetStatus() const;
 
 	protected:
-		std::unique_ptr<sf::SoundBuffer> m_soundBuffer;
-		std::unique_ptr<sf::Sound> m_sound;
+		std::unique_ptr<sf::SoundBuffer> soundBuffer;
+		std::unique_ptr<sf::Sound> sound;
 	};
 
 } // namespace Engine
