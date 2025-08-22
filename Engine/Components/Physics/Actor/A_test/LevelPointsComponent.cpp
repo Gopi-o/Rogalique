@@ -19,22 +19,22 @@ namespace Engine
 
 		// Проверяем теги для автоматического определения типа
 		const std::string& tag = gameObject->GetTag();
-		m_isStartPoint = (tag == "StartPoint");
-		m_isEndPoint = (tag == "EndPoint");
+		isStartPoint = (tag == "StartPoint");
+		isEndPoint = (tag == "EndPoint");
 
 		LOG_INFO("Level point created: " + tag);
 	}
 
 	void LevelPointsComponent::SetStartPoint(GameObject* startPoint)
 	{
-		m_startPoint = startPoint;
-		m_isStartPoint = (gameObject == startPoint);
+		startPoint = startPoint;
+		isStartPoint = (gameObject == startPoint);
 	}
 
 	void LevelPointsComponent::SetEndPoint(GameObject* endPoint)
 	{
-		m_endPoint = endPoint;
-		m_isEndPoint = (gameObject == endPoint);
+		endPoint = endPoint;
+		isEndPoint = (gameObject == endPoint);
 	}
 
 	void LevelPointsComponent::Update(float deltaTime)
@@ -49,12 +49,12 @@ namespace Engine
 
 	GameObject* LevelPointsComponent::GetStartPoint() const
 	{
-		return m_startPoint;
+		return startPoint;
 	}
 
 	GameObject* LevelPointsComponent::GetEndPoint() const
 	{
-		return m_endPoint;
+		return endPoint;
 	}
 
 	void LevelPointsComponent::OnPlayerEnter(GameObject* player)
@@ -76,13 +76,13 @@ namespace Engine
 
 		Vector2Df pos = transform->GetWorldPosition();
 
-		if (m_isStartPoint)
+		if (isStartPoint)
 		{
 			LOG_INFO("PLAYER ENTERED START POINT at (" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")");
 
 			EventSystem::GetInstance().Dispatch(LevelStartEvent(gameObject));
 		}
-		else if (m_isEndPoint)
+		else if (isEndPoint)
 		{
 			bool completed = false;
 			if (activated >= 1)

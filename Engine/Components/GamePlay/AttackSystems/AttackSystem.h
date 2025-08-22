@@ -37,7 +37,7 @@ namespace Engine
 		void Render() override {}
 
 	private:
-		std::unordered_map<std::string, AttackParams> m_attacks;
-		std::unordered_map<std::string, float> m_cooldowns;
+		std::unordered_map<std::string, AttackParams> attacks;
+		std::unordered_map<std::string, float> cooldowns;
 	};
 } // namespace Engine

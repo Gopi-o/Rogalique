@@ -13,16 +13,16 @@ namespace Engine
 
 	void AttackSystem::AddAttack(const std::string& name, const AttackParams& params)
 	{
-		m_attacks[name] = params;
-		m_cooldowns[name] = 0.0f;
+		attacks[name] = params;
+		cooldowns[name] = 0.0f;
 	}
 
 	void AttackSystem::PerformAttack(const std::string& attackName)
 	{
 		if (!gameObject)
 			return;
-		auto it = m_attacks.find(attackName);
-		if (it == m_attacks.end() || m_cooldowns[attackName] > 0)
+		auto it = attacks.find(attackName);
+		if (it == attacks.end() || cooldowns[attackName] > 0)
 			return;
 
 		const AttackParams& params = it->second;
@@ -93,12 +93,12 @@ namespace Engine
 			effect->AddHitEffect(0.1f);
 		}
 
-		m_cooldowns[attackName] = params.cooldown;
+		cooldowns[attackName] = params.cooldown;
 	}
 
 	void AttackSystem::Update(float deltaTime)
 	{
-		for (auto& cooldown : m_cooldowns)
+		for (auto& cooldown : cooldowns)
 		{
 			if (cooldown.second > 0)
 				cooldown.second -= deltaTime;
